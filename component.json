@@ -1,19 +1,20 @@
 {
-    "title":"CSV",
-    "description":"A comma-separated values (CSV) file stores tabular data (numbers and text) in plain-text form",
-    "actions":{
-        "read":{
-            "main":"./read.js",
-            "title":"Read from CSV file",
-            "fields":{
-                "reader":{
-                    "viewClass":"CSVReadView"
-                }
-            },
-            "metadata" : {
-                "out" : {}
-            },
-            "emitter" : true
+  "title": "CSV",
+  "description": "A comma-separated values (CSV) file stores tabular data (numbers and text) in plain-text form",
+  "triggers": {
+    "read": {
+      "main": "./read.js",
+      "title": "Read CSV file from URL",
+      "type": "polling",
+      "fields": {
+        "reader": {
+          "viewClass": "CSVReadView"
         }
+      },
+      "metadata": {
+        "out": {}
+      },
+      "emitter": true
     }
+  }
 }
