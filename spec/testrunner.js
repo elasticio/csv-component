@@ -5,6 +5,7 @@ function TestRunner(cb) {
     var that = this;
     events.EventEmitter.call(this);
     this.on("end", function () {
+        console.log('Ended!');
         cb(that);
     });
     this.data = [];

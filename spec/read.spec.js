@@ -7,16 +7,6 @@ describe('CSV Read component', function () {
     var Q = require('q');
     var fs = require("fs");
 
-
-    it('empty body', function (done) {
-        runTest(csv.process, {}, {}, function(runner) {
-            expect(runner.data.length).toEqual(0);
-            expect(runner.errors.length).toEqual(1);
-            expect(runner.snapshot).toBeUndefined();
-            done();
-        });
-    });
-
     nock('http://test.env.mock')
         .get('/simple.csv')
         .replyWithFile(200, __dirname + '/test/simple.csv');
@@ -30,14 +20,33 @@ describe('CSV Read component', function () {
         .replyWithFile(200, __dirname + '/test/numbers.csv');
 
     nock('http://test.env.mock')
-        .get('/numbers.csv')
+        .get('/numbers_us.csv')
         .replyWithFile(200, __dirname + '/test/numbers_us.csv');
 
     nock('http://test.env.mock')
-        .get('/numbers.csv')
+        .get('/numbers_de.csv')
         .replyWithFile(200, __dirname + '/test/numbers_de.csv');
 
-    it('should parse simple string rows', function() {
+    function expectDate(date, year, month, day, minutes, seconds) {
+        expect(date.getUTCFullYear()).toEqual(year);
+        expect(date.getUTCMonth()).toEqual(month);
+        expect(date.getUTCDate()).toEqual(day);
+        expect(date.getUTCMinutes()).toEqual(minutes);
+        expect(date.getUTCSeconds()).toEqual(seconds);
+    }
+
+
+    it('empty body', function(done) {
+        runTest(csv.process, {}, {}, function(runner) {
+            expect(runner.data.length).toEqual(0);
+            expect(runner.errors.length).toEqual(1);
+            expect(runner.snapshot).toBeUndefined();
+            done();
+        });
+    });
+
+
+    it('should parse simple string rows', function(done) {
 
         var cfg =  {
             reader: {
@@ -68,11 +77,11 @@ describe('CSV Read component', function () {
 
             expect(runner.errors.length).toEqual(0);
             expect(runner.snapshot).toBeUndefined();
-
+            done();
         });
     });
 
-    it("should parse simple date rows", function() {
+    it("should parse simple date rows", function(done) {
 
         var msg = {
         };
@@ -112,19 +121,13 @@ describe('CSV Read component', function () {
             expect(runner.errors.length).toEqual(0);
             expect(runner.snapshot).toBeUndefined();
 
+            done();
+
         });
     });
 
-    var expectDate = function(date, year, month, day, minutes, seconds) {
 
-        expect(date.getUTCFullYear()).toEqual(year);
-        expect(date.getUTCMonth()).toEqual(month);
-        expect(date.getUTCDate()).toEqual(day);
-        expect(date.getUTCMinutes()).toEqual(minutes);
-        expect(date.getUTCSeconds()).toEqual(seconds);
-    };
-
-    it("should parse simple number rows", function() {
+    it("should parse simple number rows", function(done) {
 
         var msg = {};
 
@@ -164,10 +167,11 @@ describe('CSV Read component', function () {
             expect(runner.errors.length).toEqual(0);
             expect(runner.snapshot).toBeUndefined();
 
+            done();
         });
     });
 
-    it("should parse US numbers", function() {
+    it("should parse US numbers", function(done) {
 
         var msg = {};
 
@@ -201,11 +205,11 @@ describe('CSV Read component', function () {
             expect(runner.errors.length).toEqual(0);
             expect(runner.snapshot).toBeUndefined();
 
-            expect(s3.getEncrypted).toHaveBeenCalledWith("loremipsum.fubar");
+            done();
         });
     });
 
-    it("should parse DE numbers", function() {
+    it("should parse DE numbers", function(done) {
         var msg = {};
 
         var cfg =  {
@@ -245,6 +249,7 @@ describe('CSV Read component', function () {
             expect(runner.errors.length).toEqual(0);
             expect(runner.snapshot).toBeUndefined();
 
+            done();
         });
     });
 

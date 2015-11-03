@@ -1,12 +1,12 @@
-describe('CSV Write component', function () {
-    var _ = require('underscore');
-    var uuid = require('node-uuid');
-    var csv = require('../../../lib/components/csv/write.js');
-    var messages = require('../../../lib/components/messages.js');
-    var Q = require('q');
-    var s3 = require('s3');
+var messages = require('elasticio-node').messages;
+var _ = require('underscore');
+var Q = require('q');
+var uuid = require('node-uuid');
 
-    it('empty body', function () {
+describe('CSV Write component', function () {
+    var csv = require('../lib/write.js');
+
+    xit('empty body', function () {
         var msg = {
             id: 12345,
             metadata: {},
@@ -28,7 +28,7 @@ describe('CSV Write component', function () {
         });
     });
 
-    it('values of object type are not ignored', function () {
+    xit('values of object type are not ignored', function () {
         var msg = {
             id:12345,
             attachments:{},
@@ -61,7 +61,7 @@ describe('CSV Write component', function () {
 
     });
 
-    it('should add s3 link to attachments', function () {
+    xit('should add s3 link to attachments', function () {
         var msg = {
             id:12345,
             attachments:{},
@@ -96,7 +96,7 @@ describe('CSV Write component', function () {
 
     });
 
-    it('null values', function () {
+    xit('null values', function () {
         var msg = {
             id:12345,
             attachments:{},
@@ -128,7 +128,7 @@ describe('CSV Write component', function () {
         });
     });
 
-    it('multiple headers', function () {
+    xit('multiple headers', function () {
 
         var msg = {
             id:12345,
@@ -168,7 +168,7 @@ describe('CSV Write component', function () {
 
     });
 
-    it('with line breaks', function () {
+    xit('with line breaks', function () {
 
         var msg = {
             id:12345,
@@ -207,7 +207,7 @@ describe('CSV Write component', function () {
     });
 
 
-    it('with numeric and boolean values', function () {
+    xit('with numeric and boolean values', function () {
 
         var msg = {
             id:12345,
