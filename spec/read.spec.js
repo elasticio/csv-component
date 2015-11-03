@@ -1,62 +1,44 @@
-describe('CSV Read component', function () {
-    process.env.S3_SECRET = process.env.S3_SECRET || 'my-secret';
-    process.env.S3_KEY = process.env.S3_KEY       || 'my-key';
-    process.env.S3_REGION = process.env.S3_REGION || 'eu-west-1';
-    process.env.S3_BUCKET = process.env.S3_BUCKET || 'my-bucket';
+var nock = require('nock');
 
-    var csv = require('../../../lib/components/csv/read.js');
+describe('CSV Read component', function () {
+    var csv = require('../lib/read.js');
     var runTest = require('./testrunner.js').runTest;
-    var s3 = require('s3').getClient(process.env.S3_BUCKET);
     var moment = require('moment');
     var Q = require('q');
     var fs = require("fs");
 
 
-    it('empty body', function () {
+    it('empty body', function (done) {
         runTest(csv.process, {}, {}, function(runner) {
             expect(runner.data.length).toEqual(0);
-            expect(runner.errors.length).toEqual(0);
+            expect(runner.errors.length).toEqual(1);
             expect(runner.snapshot).toBeUndefined();
+            done();
         });
     });
 
-    it('non-suitable attachments', function() {
-        var msg = {
-            id:12345,
-            metadata:{},
-            attachments:{
-                foo : {
+    nock('http://test.env.mock')
+        .get('/simple.csv')
+        .replyWithFile(200, __dirname + '/test/simple.csv');
 
-                },
-                bar : {
-                    "content-type" : 'bla'
-                }
-            },
-            body:{}
-        };
+    nock('http://test.env.mock')
+        .get('/dates.csv')
+        .replyWithFile(200, __dirname + '/test/dates.csv');
 
-        runTest(csv.process, msg, {}, function(runner) {
-            expect(runner.data.length).toEqual(0);
-            expect(runner.errors.length).toEqual(0);
-            expect(runner.snapshot).toBeUndefined();
-        });
-    });
+    nock('http://test.env.mock')
+        .get('/numbers.csv')
+        .replyWithFile(200, __dirname + '/test/numbers.csv');
+
+    nock('http://test.env.mock')
+        .get('/numbers.csv')
+        .replyWithFile(200, __dirname + '/test/numbers_us.csv');
+
+    nock('http://test.env.mock')
+        .get('/numbers.csv')
+        .replyWithFile(200, __dirname + '/test/numbers_de.csv');
 
     it('should parse simple string rows', function() {
 
-        spyOnS3GetEncrypted('simple.csv');
-
-        var msg = {
-            id:12345,
-            attachments:{
-                foo : {
-                    s3 : 'loremipsum.fubar',
-                    'content-type' : 'text/csv'
-                }
-            },
-            body:{}
-        };
-
         var cfg =  {
             reader: {
                 columns : [
@@ -67,10 +49,11 @@ describe('CSV Read component', function () {
                         property: "text2"
                     }
                 ]
-            }
+            },
+            url: "http://test.env.mock/simple.csv"
         };
 
-        runTest(csv.process, msg, cfg, function(runner) {
+        runTest(csv.process, {} , cfg, function(runner) {
             expect(runner.data.length).toEqual(2);
 
             expect(runner.data[0].body).toEqual( {
@@ -86,70 +69,12 @@ describe('CSV Read component', function () {
             expect(runner.errors.length).toEqual(0);
             expect(runner.snapshot).toBeUndefined();
 
-            expect(s3.getEncrypted).toHaveBeenCalledWith("loremipsum.fubar");
-        });
-    });
-
-    it("non-default delimiter", function() {
-        spyOnS3GetEncrypted("colon_del.csv");
-
-        var msg = {
-            id:12345,
-            attachments:{
-                foo : {
-                    s3 : 'loremipsum.fubar',
-                    'content-type' : 'text/csv'
-                }
-            },
-            body:{}
-        };
-
-        var cfg =  {
-            reader: {
-                separator: ":",
-                columns : [
-                    {
-                        property: "text"
-                    },
-                    {
-                        property: "text2"
-                    }
-                ]
-            }
-        };
-
-        runTest(csv.process, msg, cfg, function(runner) {
-            expect(runner.data.length).toEqual(2);
-
-            expect(runner.data[0].body).toEqual( {
-                text : 'lorem',
-                text2 : 'ipsum'
-            });
-
-            expect(runner.data[1].body).toEqual( {
-                text : 'dolor',
-                text2 : 'sit amet'
-            });
-
-            expect(runner.errors.length).toEqual(0);
-            expect(runner.snapshot).toBeUndefined();
-
-            expect(s3.getEncrypted).toHaveBeenCalledWith("loremipsum.fubar");
         });
     });
 
     it("should parse simple date rows", function() {
-        spyOnS3GetEncrypted("dates.csv");
 
         var msg = {
-            id:12345,
-            attachments:{
-                foo : {
-                    s3 : 'loremipsum.fubar',
-                    'content-type' : 'text/csv'
-                }
-            },
-            body:{}
         };
 
         var cfg =  {
@@ -171,7 +96,8 @@ describe('CSV Read component', function () {
                         format: 'YYYY-MM-DD HH:mm:ss Z'
                     }
                 ]
-            }
+            },
+            url : "http://test.env.mock/dates.csv"
         };
 
         runTest(csv.process, msg, cfg, function(runner) {
@@ -186,7 +112,6 @@ describe('CSV Read component', function () {
             expect(runner.errors.length).toEqual(0);
             expect(runner.snapshot).toBeUndefined();
 
-            expect(s3.getEncrypted).toHaveBeenCalledWith("loremipsum.fubar");
         });
     });
 
@@ -200,18 +125,8 @@ describe('CSV Read component', function () {
     };
 
     it("should parse simple number rows", function() {
-        spyOnS3GetEncrypted("numbers.csv");
 
-        var msg = {
-            id:12345,
-            attachments:{
-                foo : {
-                    s3 : 'loremipsum.fubar',
-                    'content-type' : 'text/csv'
-                }
-            },
-            body:{}
-        };
+        var msg = {};
 
         var cfg =  {
             reader: {
@@ -231,7 +146,8 @@ describe('CSV Read component', function () {
                         format: 'dec_point'
                     }
                 ]
-            }
+            },
+            url : "http://test.env.mock/numbers.csv"
         };
 
         runTest(csv.process, msg, cfg, function(runner) {
@@ -248,23 +164,12 @@ describe('CSV Read component', function () {
             expect(runner.errors.length).toEqual(0);
             expect(runner.snapshot).toBeUndefined();
 
-            expect(s3.getEncrypted).toHaveBeenCalledWith("loremipsum.fubar");
         });
     });
 
     it("should parse US numbers", function() {
-        spyOnS3GetEncrypted("numbers_us.csv");
 
-        var msg = {
-            id:12345,
-            attachments:{
-                foo : {
-                    s3 : 'loremipsum.fubar',
-                    'content-type' : 'text/csv'
-                }
-            },
-            body:{}
-        };
+        var msg = {};
 
         var cfg =  {
             reader: {
@@ -280,7 +185,8 @@ describe('CSV Read component', function () {
                         format: 'dec_point'
                     }
                 ]
-            }
+            },
+            url : "http://test.env.mock/numbers_us.csv"
         };
 
         runTest(csv.process, msg, cfg, function(runner) {
@@ -300,18 +206,7 @@ describe('CSV Read component', function () {
     });
 
     it("should parse DE numbers", function() {
-        spyOnS3GetEncrypted("numbers_de.csv");
-
-        var msg = {
-            id:12345,
-            attachments:{
-                foo : {
-                    s3 : 'loremipsum.fubar',
-                    'content-type' : 'text/csv'
-                }
-            },
-            body:{}
-        };
+        var msg = {};
 
         var cfg =  {
             reader: {
@@ -332,7 +227,8 @@ describe('CSV Read component', function () {
                         format: 'dec_comma'
                     }
                 ]
-            }
+            },
+            url : "http://test.env.mock/numbers_de.csv"
         };
 
         runTest(csv.process, msg, cfg, function(runner) {
@@ -349,14 +245,7 @@ describe('CSV Read component', function () {
             expect(runner.errors.length).toEqual(0);
             expect(runner.snapshot).toBeUndefined();
 
-            expect(s3.getEncrypted).toHaveBeenCalledWith("loremipsum.fubar");
         });
     });
-
-    var spyOnS3GetEncrypted = function(fileName) {
-        spyOn(s3, 'getEncrypted').andCallFake(function() {
-            return Q(fs.createReadStream(__dirname + "/test/" + fileName));
-        });
-    };
 
 });

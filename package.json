@@ -21,16 +21,23 @@
     "url": "https://github.com/elasticio/csv-component/issues"
   },
   "devDependencies": {
+    "code-quality-js": "git+https://github.com/elasticio/code-quality-js.git#master",
+    "git-guppy": "~1.0.0",
     "gulp": "^3.8.11",
     "gulp-jasmine": "^2.0.1",
     "gulp-jscs": "~1.6.0",
-    "git-guppy": "~1.0.0",
-    "code-quality-js": "git+https://github.com/elasticio/code-quality-js.git#master"
+    "nock": "^2.17.0"
   },
   "homepage": "https://github.com/elasticio/csv-component#readme",
   "dependencies": {
     "csv": "^0.4.6",
     "debug": "^2.2.0",
-    "elasticio-sailor-nodejs": "^1.0.1"
+    "elasticio-node": "0.0.7",
+    "elasticio-sailor-nodejs": "^1.0.1",
+    "moment": "^2.10.6",
+    "node-uuid": "^1.4.3",
+    "q": "^1.4.1",
+    "request": "^2.65.0",
+    "underscore": "^1.8.3"
   }
 }

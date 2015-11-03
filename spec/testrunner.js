@@ -1,22 +1,22 @@
 var events = require('events');
 var util = require('util');
 
-function TestRunner() {
+function TestRunner(cb) {
     var that = this;
     events.EventEmitter.call(this);
-    this.on("end", function() {
-        that.endWasCalled = true;
+    this.on("end", function () {
+        cb(that);
     });
     this.data = [];
-    this.on('data', function(data) {
+    this.on('data', function (data) {
         that.data.push(data);
     });
     this.errors = [];
-    this.on('error', function(err) {
+    this.on('error', function (err) {
         that.errors.push(err);
     });
     this.snapshot = undefined;
-    this.on('snapshot', function(snapshot) {
+    this.on('snapshot', function (snapshot) {
         that.snapshot = snapshot;
     });
 }
@@ -31,19 +31,9 @@ TestRunner.prototype.error = console.error;
 
 TestRunner.prototype.warn = console.log;
 
-var runTest = function(func, msg, cfg, callback, snapshot) {
-    var runner = new TestRunner();
-    runs(function() {
-        func.call(runner, msg, cfg, undefined, snapshot);
-    });
-
-    waitsFor(function() {
-        return runner.endWasCalled;
-    }, 'end event was never emitted', 2000);
-
-    runs(function() {
-        callback(runner);
-    });
+var runTest = function (func, msg, cfg, callback, snapshot) {
+    var runner = new TestRunner(callback);
+    func.call(runner, msg, cfg, undefined, snapshot);
 };
 
 exports.runTest = runTest;

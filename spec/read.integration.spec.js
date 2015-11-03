@@ -1,34 +1,18 @@
-describe('CSV Read component integration tests', function () {
-    process.env.S3_SECRET = process.env.S3_SECRET || 'my-secret';
-    process.env.S3_KEY = process.env.S3_KEY       || 'my-key';
-    process.env.S3_REGION = process.env.S3_REGION || 'eu-west-1';
-    process.env.S3_BUCKET = process.env.S3_BUCKET || 'my-bucket';
-    process.env.S3_CRYPTO_PASSWORD = 'all-attachment-password';
-    process.env.S3_CRYPTO_ALGORITHM = 'aes-256-cbc';
+var nock = require('nock');
 
-    var csv = require('../../../lib/components/csv/read.js');
+describe('CSV Read component integration tests', function () {
+    var csv = require('../lib/read.js');
     var runTest = require('./testrunner.js').runTest;
     var fs = require('fs');
     var Q = require('q');
-    var s3 = require('s3').getClient(process.env.S3_BUCKET);
 
-    it('winter12.csv', function () {
-        spyOn(s3, 'getEncrypted').andCallFake(function() {
-            return Q(fs.createReadStream(__dirname + '/test/winter12.csv'));
-        });
-
-        var msg = {
-            id:12345,
-            attachments:{
-                foo : {
-                    s3 : 'http://loremipsum.fubar',
-                    'content-type' : 'text/csv'
-                }
-            },
-            body:{}
-        };
+    nock('http://test.env.mock')
+        .get('/winter12.csv')
+        .replyWithFile(200, __dirname + '/test/winter12.csv');
 
 
+    it('winter12.csv', function (done) {
+        var msg = {};
 
         var cfg =  {
             reader: {
@@ -124,7 +108,8 @@ describe('CSV Read component integration tests', function () {
                         type : 'string'
                     }
                 ]
-            }
+            },
+            url: "http://test.env.mock/winter12.csv"
         };
 
         runTest(csv.process, msg, cfg, function(runner) {
@@ -180,6 +165,7 @@ describe('CSV Read component integration tests', function () {
 
             expect(runner.errors.length).toEqual(0);
             expect(runner.snapshot).toBeUndefined();
+            done();
         });
     });
 
