@@ -1,0 +1,27 @@
+{
+  "name": "csv-component",
+  "version": "1.0.0",
+  "description": "CSV Component for elastic.io platform",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"WARNING: no test specified\" && exit 0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/elasticio/csv-component.git"
+  },
+  "keywords": [
+    "csv",
+    "elastic.io",
+    "ipaas"
+  ],
+  "author": "elastic.io GmbH",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/elasticio/csv-component/issues"
+  },
+  "homepage": "https://github.com/elasticio/csv-component#readme",
+  "dependencies": {
+    "elasticio-sailor-nodejs": "^1.0.1"
+  }
+}
