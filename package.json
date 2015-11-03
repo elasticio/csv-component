@@ -20,8 +20,17 @@
   "bugs": {
     "url": "https://github.com/elasticio/csv-component/issues"
   },
+  "devDependencies": {
+    "gulp": "^3.8.11",
+    "gulp-jasmine": "^2.0.1",
+    "gulp-jscs": "~1.6.0",
+    "git-guppy": "~1.0.0",
+    "code-quality-js": "git+https://github.com/elasticio/code-quality-js.git#master"
+  },
   "homepage": "https://github.com/elasticio/csv-component#readme",
   "dependencies": {
+    "csv": "^0.4.6",
+    "debug": "^2.2.0",
     "elasticio-sailor-nodejs": "^1.0.1"
   }
 }
