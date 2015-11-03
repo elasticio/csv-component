@@ -3,7 +3,7 @@
   "description": "A comma-separated values (CSV) file stores tabular data (numbers and text) in plain-text form",
   "triggers": {
     "read": {
-      "main": "./read.js",
+      "main": "./lib/read.js",
       "title": "Read CSV file from URL",
       "type": "polling",
       "fields": {
