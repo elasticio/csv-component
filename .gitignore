@@ -1,6 +1,9 @@
 # Logs
 logs
 *.log
+.idea
+.DS_Store
+
 
 # Runtime data
 pids
