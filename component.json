@@ -9,8 +9,9 @@
       "fields": {
         "url" : {
           "label": "CSV URL",
-          "required": true,
-          "viewClass": "TextFieldView"
+          "required": false,
+          "note" : "Please leave this field blank if you want to use <strong>attachments</strong> from the incoming message.",
+          "viewClass": "TextFieldWithNoteView"
         },
         "reader": {
           "viewClass": "CSVReadView"
