@@ -7,10 +7,11 @@
       "title": "Read CSV file from URL",
       "type": "polling",
       "fields": {
-        "url" : {
+        "url": {
           "label": "CSV URL",
-          "required": false,
-          "note" : "Please leave this field blank if you want to use <strong>attachments</strong> from the incoming message.",
+          "required": true,
+          "placeholder": "http://my-url.com/foo.csv",
+          "note": "We will fetch this URL and parse it as CSV file",
           "viewClass": "TextFieldWithNoteView"
         },
         "reader": {
@@ -19,8 +20,21 @@
       },
       "metadata": {
         "out": {}
+      }
+    }
+  },
+  "actions" : {
+    "read_action": {
+      "main": "./lib/read.js",
+      "title": "Read CSV file from incoming message attachment",
+      "fields": {
+        "reader": {
+          "viewClass": "CSVReadView"
+        }
       },
-      "emitter": true
+      "metadata": {
+        "out": {}
+      }
     }
   }
 }
