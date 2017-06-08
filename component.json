@@ -36,6 +36,14 @@
       "metadata": {
         "out": {}
       }
+    },
+    "write_attachment": {
+      "main": "./lib/actions/write.js",
+      "title": "Write CSV attachment",
+      "metadata": {
+        "in": {},
+        "out": {}
+      }
     }
   }
 }
