@@ -41,6 +41,11 @@
     "write_attachment": {
       "main": "./lib/actions/write.js",
       "title": "Write CSV attachment",
+      "fields": {
+        "reader": {
+          "viewClass": "CSVReadView"
+        }
+      },
       "metadata": {
         "in": {},
         "out": {}
