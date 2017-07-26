@@ -6,6 +6,9 @@
   "scripts": {
     "test": "echo \"WARNING: no test specified\" && exit 0"
   },
+  "engines": {
+    "node": "6.4.0"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/elasticio/csv-component.git"
