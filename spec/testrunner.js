@@ -1,23 +1,25 @@
-var events = require('events');
-var util = require('util');
+'use strict';
+
+let events = require('events');
+let util = require('util');
 
 function TestRunner(cb) {
-    var that = this;
+    let that = this;
     events.EventEmitter.call(this);
-    this.on("end", function () {
+    this.on('end', function onEnd() {
         console.log('Ended!');
         cb(that);
     });
     this.data = [];
-    this.on('data', function (data) {
+    this.on('data', function onData(data) {
         that.data.push(data);
     });
     this.errors = [];
-    this.on('error', function (err) {
+    this.on('error', function onError(err) {
         that.errors.push(err);
     });
     this.snapshot = undefined;
-    this.on('snapshot', function (snapshot) {
+    this.on('snapshot', function onSnapshot(snapshot) {
         that.snapshot = snapshot;
     });
 }
@@ -32,9 +34,7 @@ TestRunner.prototype.error = console.error;
 
 TestRunner.prototype.warn = console.log;
 
-var runTest = function (func, msg, cfg, callback, snapshot) {
-    var runner = new TestRunner(callback);
+exports.runTest = function runTest(func, msg, cfg, callback, snapshot) {
+    let runner = new TestRunner(callback);
     func.call(runner, msg, cfg, undefined, snapshot);
 };
-
-exports.runTest = runTest;

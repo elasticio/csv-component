@@ -4,7 +4,9 @@
   "description": "CSV Component for elastic.io platform",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"WARNING: no test specified\" && exit 0"
+    "pretest": "eslint spec spec-integration --fix",
+    "test": "mocha spec",
+    "integration-test": "mocha spec-integration"
   },
   "engines": {
     "node": "8.1.0"
@@ -40,11 +42,10 @@
     "underscore": "^1.8.3"
   },
   "devDependencies": {
-    "code-quality-js": "1.0.2",
-    "git-guppy": "~1.0.0",
-    "gulp": "^3.8.11",
-    "gulp-jasmine": "^2.0.1",
-    "gulp-jscs": "~1.6.0",
+    "chai": "^4.1.1",
+    "eslint": "^3.1.1",
+    "eslint-plugin-mocha": "^4.8.0",
+    "mocha": "^3.2.0",
     "nock": "9.0.13"
   }
 }
