@@ -42,7 +42,7 @@
       "main": "./lib/actions/write.js",
       "title": "Write CSV attachment",
       "fields": {
-        "reader": {
+        "writer": {
           "viewClass": "CSVReadView"
         }
       },
