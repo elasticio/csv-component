@@ -39,6 +39,8 @@
       }
     },
     "write_attachment": {
+      "description":
+      "Multiple incoming events can be combined into one CSV file with the write CSV action.  See https://github.com/elasticio/csv-component/ for additional documentation.",
       "main": "./lib/actions/write.js",
       "title": "Write CSV attachment",
       "fields": {

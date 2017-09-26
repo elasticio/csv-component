@@ -37,8 +37,8 @@ describe('CSV Read component', function CsvReadComponentTests() {
     }
 
 
-    it('empty body', function emptyBodyTest(done) {
-        runTest(csv.process, {}, {}, function emptyBodyTestAssertions(runner) {
+    it('should handle empty body', function handleEmptyBodyTest(done) {
+        runTest(csv.process, {}, {}, function handleEmptyBodyTestAssertions(runner) {
             expect(runner.data.length).to.equal(0);
             expect(runner.errors.length).to.equal(1);
             expect(runner.snapshot).to.be.undefined;
