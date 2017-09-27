@@ -82,3 +82,8 @@ will produce the following ``.csv`` file:
     ,mybar
 
 Currently no formatting is performed as part of CSV Write.
+
+The output of the CSV Write component will be a message with an attachment.  In
+order to access this attachment, the component following the CSV Write must be
+able to handle file attachments such as the [SFTP
+component](https://github.com/elasticio/sftp-component).
