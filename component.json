@@ -45,7 +45,7 @@
       "title": "Write CSV attachment",
       "fields": {
         "writer": {
-          "viewClass": "CSVReadView"
+          "viewClass": "CSVWriteView"
         }
       },
       "metadata": {
