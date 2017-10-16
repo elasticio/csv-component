@@ -49,7 +49,10 @@
         }
       },
       "metadata": {
-        "in": {},
+        "in": {
+            "type": "object",
+            "properties": {}
+        },
         "out": {}
       }
     }
