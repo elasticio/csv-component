@@ -1,6 +1,40 @@
 # csv-component
 
-> A CSV component for the [elastic.io platform](http://www.elastic.io "elastic.io platform").
+A CSV component for the [elastic.io platform](http://www.elastic.io "elastic.io platform").
+
+
+## Write CSV attachment
+
+Multiple incoming events can be combined into one CSV file with the write CSV
+action.  Incoming events will be written into the CSV file until there is a gap
+of more than 10 seconds between events.  As part of the component setup, one
+must specify the columns of the CSV file.  These columns will be published as
+the header in the first row.  For each incoming event, the value for each header
+will be stringified and written as the value for that cell.  All other
+properties will be ignored.  For example, headers ``foo,bar`` along with the
+following JSON events
+
+    {"foo":"myfoo", "bar":"mybar"}
+    {"foo":"myfoo", "bar":[1,2]}
+    {"bar":"mybar", "baz":"mybaz"}
+
+will produce the following ``.csv`` file:
+
+    foo,bar
+    myfoo,mybar
+    myfoo,"[1,2]"
+    ,mybar
+
+When columns are added in the UI, you will be presented with an opportunity to
+provide a JSONata expression per column.  If you require number formatting that
+is specific to a locale, the JSONata expression should handle that concern.
+
+![screenshot from 2017-10-17 09-28-04](https://user-images.githubusercontent.com/5710732/31651871-926b4530-b31d-11e7-936f-bcf3ff05f8e2.png)
+
+The output of the CSV Write component will be a message with an attachment.  In
+order to access this attachment, the component following the CSV Write must be
+able to handle file attachments such as the [SFTP
+component](https://github.com/elasticio/sftp-component).
 
 This is an open source component to work with
 [CSV](http://en.wikipedia.org/wiki/Comma-separated_values) files in your
@@ -58,32 +92,3 @@ $ git push elasticio master
 Obviously the naming of your team and repository is entirely up-to you and if
 you do not put any corresponding naming our system will auto generate it for you
 but the naming might not entirely correspond to your project requirements.
-
-## Write CSV attachment
-
-Multiple incoming events can be combined into one CSV file with the write CSV
-action.  Incoming events will be written into the CSV file until there is a gap
-of more than 10 seconds between events.  As part of the component setup, one
-must specify the columns of the CSV file.  These columns will be published as
-the header in the first row.  For each incoming event, the value for each header
-will be stringified and written as the value for that cell.  All other
-properties will be ignored.  For example, headers ``foo,bar`` along with the
-following JSON events
-
-    {"foo":"myfoo", "bar":"mybar"}
-    {"foo":"myfoo", "bar":[1,2]}
-    {"bar":"mybar", "baz":"mybaz"}
-
-will produce the following ``.csv`` file:
-
-    foo,bar
-    myfoo,mybar
-    myfoo,"[1,2]"
-    ,mybar
-
-Currently no formatting is performed as part of CSV Write.
-
-The output of the CSV Write component will be a message with an attachment.  In
-order to access this attachment, the component following the CSV Write must be
-able to handle file attachments such as the [SFTP
-component](https://github.com/elasticio/sftp-component).

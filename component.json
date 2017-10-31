@@ -45,11 +45,14 @@
       "title": "Write CSV attachment",
       "fields": {
         "writer": {
-          "viewClass": "CSVReadView"
+          "viewClass": "CSVWriteView"
         }
       },
       "metadata": {
-        "in": {},
+        "in": {
+            "type": "object",
+            "properties": {}
+        },
         "out": {}
       }
     }
