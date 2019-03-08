@@ -32,16 +32,19 @@
         "url": {
           "label": "CSV URL",
           "required": true,
-          "placeholder": "http://my-url.com/foo.csv",
-          "note": "We will fetch this URL and parse it as CSV file",
           "viewClass": "JSONataView"
         },
-        "header": {
-          "label": "Authorization header",
-          "required": true,
-          "placeholder": "Basic hashstring",
-          "note": "Put hashstring of credentials like this: Basic hashstring",
-          "viewClass": "TextFieldWithNoteView"
+        "username": {
+          "label": "Username (for Basic auth)",
+          "required": false,
+          "note": "Put username for Basic auth, if required",
+          "viewClass": "TextFieldView"
+        },
+        "password": {
+          "label": "Password (for Basic auth)",
+          "required": false,
+          "note": "Put password for Basic auth, if required",
+          "viewClass": "PasswordFieldView"
         },
         "reader": {
           "viewClass": "CSVReadView"
