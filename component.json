@@ -32,7 +32,8 @@
         "url": {
           "label": "CSV URL",
           "required": true,
-          "viewClass": "JSONataView"
+          "viewClass": "TextAreaView",
+          "note": "Put url, placeholders are optional. Placeholders should look like: {startDate}"
         },
         "username": {
           "label": "Username (for Basic auth)",
@@ -50,9 +51,7 @@
           "viewClass": "CSVReadView"
         }
       },
-      "metadata": {
-        "out": {}
-      }
+      "dynamicMetadata": true
     },
     "read_attachment": {
       "main": "./lib/read.js",
