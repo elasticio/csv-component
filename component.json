@@ -34,7 +34,14 @@
           "required": true,
           "placeholder": "http://my-url.com/foo.csv",
           "note": "We will fetch this URL and parse it as CSV file",
-          "viewClass": "RESTAPIView"
+          "viewClass": "TextFieldWithNoteView"
+        },
+        "header": {
+          "label": "Authorization header",
+          "required": true,
+          "placeholder": "Basic hashstring",
+          "note": "We will fetch this URL and parse it as CSV file",
+          "viewClass": "TextFieldWithNoteView"
         },
         "reader": {
           "viewClass": "CSVReadView"
