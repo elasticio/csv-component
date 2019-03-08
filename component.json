@@ -25,7 +25,27 @@
     }
   },
   "actions" : {
-    "read_action": {
+    "read":{
+      "main": "./lib/actions/read.js",
+      "title": "Read CSV file from URL",
+      "fields": {
+        "url": {
+          "label": "CSV URL",
+          "required": true,
+          "placeholder": "http://my-url.com/foo.csv",
+          "note": "We will fetch this URL and parse it as CSV file",
+          "viewClass": "RESTAPIView"
+        },
+        "reader": {
+          "viewClass": "CSVReadView"
+        }
+      },
+      "metadata": {
+        "out": {}
+      }
+    }
+    },
+    "read_attachment": {
       "main": "./lib/read.js",
       "title": "Read CSV attachment",
       "fields": {
