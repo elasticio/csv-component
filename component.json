@@ -34,13 +34,13 @@
           "required": true,
           "placeholder": "http://my-url.com/foo.csv",
           "note": "We will fetch this URL and parse it as CSV file",
-          "viewClass": "TextFieldWithNoteView"
+          "viewClass": "JSONataView"
         },
         "header": {
           "label": "Authorization header",
           "required": true,
           "placeholder": "Basic hashstring",
-          "note": "We will fetch this URL and parse it as CSV file",
+          "note": "Put hashstring of credentials like this: Basic hashstring",
           "viewClass": "TextFieldWithNoteView"
         },
         "reader": {
