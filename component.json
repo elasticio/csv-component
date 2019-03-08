@@ -25,7 +25,7 @@
     }
   },
   "actions" : {
-    "read":{
+    "read_from_url":{
       "main": "./lib/actions/read.js",
       "title": "Read CSV file from URL",
       "fields": {
