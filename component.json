@@ -43,7 +43,6 @@
       "metadata": {
         "out": {}
       }
-    }
     },
     "read_attachment": {
       "main": "./lib/read.js",
