@@ -6,11 +6,16 @@ let nock = require('nock');
 
 describe('CSV Read component', function CsvReadComponentTests() {
     let csv = require('../lib/read.js');
+    let readAction = require('../lib/actions/read.js');
     let runTest = require('./testrunner.js').runTest;
 
     nock('http://test.env.mock')
         .get('/simple.csv')
         .replyWithFile(200, __dirname + '/../test/simple.csv');
+
+    nock('http://test.env.mock')
+        .get('/simple_value1_value2.csv')
+        .replyWithFile(200, __dirname + '/../test/simple_value1_value2.csv');
 
     nock('http://test.env.mock')
         .get('/dates.csv')
@@ -62,7 +67,7 @@ describe('CSV Read component', function CsvReadComponentTests() {
             url: 'http://test.env.mock/simple.csv'
         };
 
-        runTest(csv.process, {} , cfg, function simpleStringRowsTestAssertions(runner) {
+        runTest(csv.process, {}, cfg, function simpleStringRowsTestAssertions(runner) {
             expect(runner.data.length).to.equal(2);
 
             expect(runner.data[0].body).to.deep.equal({
@@ -80,6 +85,51 @@ describe('CSV Read component', function CsvReadComponentTests() {
             done();
         });
     });
+
+
+    it('should parse simple string rows with placeholder in url', function simpleStringRowsWithPlaceholderInUrlTest(done) {
+
+        let cfg = {
+            reader: {
+                columns: [
+                    {
+                        property: 'text'
+                    },
+                    {
+                        property: 'text2'
+                    }
+                ]
+            },
+            url: 'http://test.env.mock/simple_{placeholder1}_{placeholder2}.csv',
+            username: 'user',
+            password: 'pass'
+        };
+
+        const msg = [];
+        msg.body = '{'
+          + '    "placeholder1": "value1",'
+          + '    "placeholder2": "value2"'
+          + '}';
+
+        runTest(readAction.process, msg, cfg, function simpleStringRowsWithPlaceholderInUrlTestAssertions(runner) {
+              expect(runner.data.length).to.equal(1);
+
+              expect(runner.data[0].body).to.deep.equal({
+                  text: 'placeholder1',
+                  text2: 'value1'
+              });
+
+              expect(runner.data[1].body).to.deep.equal({
+                  text: 'placeholder2',
+                  text2: 'value2'
+              });
+
+              expect(runner.errors.length).to.equal(0);
+              expect(runner.snapshot).to.be.undefined;
+              done();
+          });
+    });
+
 
     it('should parse simple date rows', function simpleDataRowsTest(done) {
 
