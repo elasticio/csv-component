@@ -87,7 +87,7 @@ describe('CSV Read component', function CsvReadComponentTests() {
     });
 
 
-    it('should parse simple string rows with placeholder in url', function simpleStringRowsWithPlaceholderInUrlTest(done) {
+    it('should parse simple string rows with placeholder in url', function placeholderInUrlTest(done) {
 
         let cfg = {
             reader: {
@@ -111,7 +111,7 @@ describe('CSV Read component', function CsvReadComponentTests() {
           + '    "placeholder2": "value2"'
           + '}';
 
-        runTest(readAction.process, msg, cfg, function simpleStringRowsWithPlaceholderInUrlTestAssertions(runner) {
+        runTest(readAction.process, msg, cfg, function placeholderInUrlTestAssertions(runner) {
               expect(runner.data.length).to.equal(1);
 
               expect(runner.data[0].body).to.deep.equal({
