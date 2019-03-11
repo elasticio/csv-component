@@ -110,7 +110,7 @@ describe('CSV Read component', () => {
     };
 
     runTest(readAction.process, msg, cfg, (runner) => {
-      expect(runner.data.length).to.equal(1);
+      expect(runner.data.length).to.equal(2);
 
       expect(runner.data[0].body).to.deep.equal({
         text: 'placeholder1',
