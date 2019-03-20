@@ -25,7 +25,37 @@
     }
   },
   "actions" : {
-    "read_action": {
+    "read_from_url":{
+      "main": "./lib/actions/read.js",
+      "title": "Read CSV file from URL",
+      "fields": {
+        "url": {
+          "label": "CSV URL",
+          "required": true,
+          "viewClass": "TextAreaView",
+          "note": "Put url, placeholders are optional. Placeholders should look like: {name}"
+        },
+        "username": {
+          "label": "Username (for Basic auth)",
+          "required": false,
+          "note": "Put username for Basic auth, if required",
+          "viewClass": "TextFieldView"
+        },
+        "password": {
+          "label": "Password (for Basic auth)",
+          "required": false,
+          "note": "Put password for Basic auth, if required",
+          "viewClass": "PasswordFieldView"
+        },
+        "reader": {
+          "viewClass": "CSVReadView"
+        }
+      },
+      "metadata": {
+        "out": {}
+      }
+    },
+    "read_attachment": {
       "main": "./lib/read.js",
       "title": "Read CSV attachment",
       "fields": {
