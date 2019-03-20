@@ -1,6 +1,53 @@
 # csv-component
 
-A CSV component for the [elastic.io platform](http://www.elastic.io "elastic.io platform").
+## Description
+This is the open source CSV component to work with
+[CSV](http://en.wikipedia.org/wiki/Comma-separated_values) files in your
+integration flow and is developed specifically to run on [elastic.io
+platform](http://www.elastic.io "elastic.io platform").
+### Purpose
+### Completeness Matrix (Completeness Matrix Template)
+### How works.  API version / SDK version
+### Requirements
+#### Environment variables 
+#### Others
+## Credentials
+  ### field1
+  ### field2
+## Actions (if any)
+  ### Action1
+    #### List of Expected Config fields
+    #### Expected input metadata
+    #### Expected output metadata
+    #### Sample pseudo-code (optional)
+    #### Standardize Names (Human readable + Machine readable)
+    #### Known limitations for the particular trigger/action / Planned future stages
+    #### Authentication scopes
+    #### Links to documentation
+  ### Action2
+    #### List of Expected Config fields
+    #### Expected input metadata
+    #### Expected output metadata
+    #### Sample pseudo-code (optional)
+    #### Standardize Names (Human readable + Machine readable)
+    #### Known limitations for the particular trigger/action / Planned future stages
+    #### Authentication scopes
+    #### Links to documentation
+## Triggers (if any)
+  ### Trigger1
+    #### List of Expected Config fields
+    #### Expected input metadata
+    #### Expected output metadata
+    #### Sample pseudo-code (optional)
+    #### Standardize Names (Human readable + Machine readable)
+    #### Known limitations for the particular trigger/action / Planned future stages
+    #### Authentication scopes
+    #### Links to documentation
+## Additional info (If any)
+## Known limitations (common for the component)
+## <System> API and Documentation links (endpoints)
+
+
 
 
 ## Write CSV attachment
@@ -8,8 +55,8 @@ A CSV component for the [elastic.io platform](http://www.elastic.io "elastic.io 
 Multiple incoming events can be combined into one CSV file with the write CSV
 action.  Incoming events will be written into the CSV file until there is a gap
 of more than 10 seconds between events.  As part of the component setup, one
-must specify the columns of the CSV file.  These columns will be published as
-the header in the first row.  For each incoming event, the value for each header
+must specify the columns of the CSV file. These columns will be published as
+the header in the first row. For each incoming event, the value for each header
 will be stringified and written as the value for that cell.  All other
 properties will be ignored.  For example, headers ``foo,bar`` along with the
 following JSON events
