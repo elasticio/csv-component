@@ -47,6 +47,12 @@
           "note": "Put password for Basic auth, if required",
           "viewClass": "PasswordFieldView"
         },
+        "returnAsAttachment": {
+          "label": "Return result as attachment",
+          "required": false,
+          "note": "Check, if you need to return result as attachment, instead of emit as message",
+          "viewClass": "CheckBoxView"
+        },
         "reader": {
           "viewClass": "CSVReadView"
         }

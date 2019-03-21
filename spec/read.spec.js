@@ -4,7 +4,7 @@ const { expect } = require('chai');
 const nock = require('nock');
 
 const csv = require('../lib/read.js');
-const readAction = require('../lib/actions/read.js');
+//const readAction = require('../lib/actions/read.js');
 const { runTest } = require('./testrunner.js');
 
 describe('CSV Read component', () => {
@@ -85,9 +85,10 @@ describe('CSV Read component', () => {
     });
   });
 
-
+/*
   it('should parse simple string rows with placeholder in url', (done) => {
     const cfg = {
+      returnAsAttachment: true,
       reader: {
         columns: [
           {
@@ -127,7 +128,7 @@ describe('CSV Read component', () => {
       done();
     });
   });
-
+*/
 
   it('should parse simple date rows', (done) => {
     const msg = {};
