@@ -33,16 +33,14 @@
     "elasticio-node": "0.0.7",
     "elasticio-rest-node": "^1.2.2",
     "elasticio-sailor-nodejs": "2.2.3-dev.2",
+    "jsonata": "^1.6.4",
     "lodash": "^4.17.4",
     "moment": "^2.10.6",
     "node-uuid": "^1.4.3",
     "q": "^1.4.1",
     "request": "^2.65.0",
     "request-promise": "^4.2.1",
-    "remove-trailing-slash": "^0.1.0",
-    "remove-leading-slash": "^1.0.1",
-    "underscore": "^1.8.3",
-    "jsonata": "^1.6.4"
+    "underscore": "^1.8.3"
   },
   "devDependencies": {
     "chai": "^4.1.1",
