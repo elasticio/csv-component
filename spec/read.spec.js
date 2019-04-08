@@ -1,299 +1,255 @@
-/* eslint-disable no-path-concat,prefer-template,no-unused-expressions */
-const { expect } = require('chai');
+'use strict';
 
-const nock = require('nock');
+const expect = require('chai').expect;
 
-const csv = require('../lib/read.js');
-//const readAction = require('../lib/actions/read.js');
-const { runTest } = require('./testrunner.js');
+let nock = require('nock');
 
-describe('CSV Read component', () => {
-  nock('http://test.env.mock')
-    .get('/simple.csv')
-    .replyWithFile(200, __dirname + '/../test/simple.csv');
+describe('CSV Read component', function CsvReadComponentTests() {
+    let csv = require('../lib/read.js');
+    let runTest = require('./testrunner.js').runTest;
 
-  nock('http://test.env.mock')
-    .get('/simple_value1_value2.csv')
-    .replyWithFile(200, __dirname + '/../test/simple_value1_value2.csv');
+    nock('http://test.env.mock')
+        .get('/simple.csv')
+        .replyWithFile(200, __dirname + '/../test/simple.csv');
 
-  nock('http://test.env.mock')
-    .get('/dates.csv')
-    .replyWithFile(200, __dirname + '/../test/dates.csv');
+    nock('http://test.env.mock')
+        .get('/dates.csv')
+        .replyWithFile(200, __dirname + '/../test/dates.csv');
 
-  nock('http://test.env.mock')
-    .get('/numbers.csv')
-    .replyWithFile(200, __dirname + '/../test/numbers.csv');
+    nock('http://test.env.mock')
+        .get('/numbers.csv')
+        .replyWithFile(200, __dirname + '/../test/numbers.csv');
 
-  nock('http://test.env.mock')
-    .get('/numbers_us.csv')
-    .replyWithFile(200, __dirname + '/../test/numbers_us.csv');
+    nock('http://test.env.mock')
+        .get('/numbers_us.csv')
+        .replyWithFile(200, __dirname + '/../test/numbers_us.csv');
 
-  nock('http://test.env.mock')
-    .get('/numbers_de.csv')
-    .replyWithFile(200, __dirname + '/../test/numbers_de.csv');
+    nock('http://test.env.mock')
+        .get('/numbers_de.csv')
+        .replyWithFile(200, __dirname + '/../test/numbers_de.csv');
 
-  function expectDate(date, year, month, day, minutes, seconds) {
-    expect(date.getUTCFullYear()).to.equal(year);
-    expect(date.getUTCMonth()).to.equal(month);
-    expect(date.getUTCDate()).to.equal(day);
-    expect(date.getUTCMinutes()).to.equal(minutes);
-    expect(date.getUTCSeconds()).to.equal(seconds);
-  }
+    function expectDate(date, year, month, day, minutes, seconds) {
+        expect(date.getUTCFullYear()).to.equal(year);
+        expect(date.getUTCMonth()).to.equal(month);
+        expect(date.getUTCDate()).to.equal(day);
+        expect(date.getUTCMinutes()).to.equal(minutes);
+        expect(date.getUTCSeconds()).to.equal(seconds);
+    }
 
 
-  it('should handle empty body', (done) => {
-    runTest(csv.process, {}, {}, (runner) => {
-      expect(runner.data.length).to.equal(0);
-      expect(runner.errors.length).to.equal(1);
-      expect(runner.snapshot).to.be.undefined;
-      done();
+    it('should handle empty body', function handleEmptyBodyTest(done) {
+        runTest(csv.process, {}, {}, function handleEmptyBodyTestAssertions(runner) {
+            expect(runner.data.length).to.equal(0);
+            expect(runner.errors.length).to.equal(1);
+            expect(runner.snapshot).to.be.undefined;
+            done();
+        });
     });
-  });
 
 
-  it('should parse simple string rows', (done) => {
-    const cfg = {
-      reader: {
-        columns: [
-          {
-            property: 'text',
-          },
-          {
-            property: 'text2',
-          },
-        ],
-      },
-      url: 'http://test.env.mock/simple.csv',
-    };
+    it('should parse simple string rows', function simpleStringRowsTest(done) {
+        let cfg = {
+            reader: {
+                columns: [
+                    {
+                        property: 'text'
+                    },
+                    {
+                        property: 'text2'
+                    }
+                ]
+            },
+            url: 'http://test.env.mock/simple.csv'
+        };
 
-    runTest(csv.process, {}, cfg, (runner) => {
-      expect(runner.data.length).to.equal(2);
+        runTest(csv.process, {} , cfg, function simpleStringRowsTestAssertions(runner) {
+            expect(runner.data.length).to.equal(2);
 
-      expect(runner.data[0].body).to.deep.equal({
-        text: 'lorem',
-        text2: 'ipsum',
-      });
+            expect(runner.data[0].body).to.deep.equal({
+                text: 'lorem',
+                text2: 'ipsum'
+            });
 
-      expect(runner.data[1].body).to.deep.equal({
-        text: 'dolor',
-        text2: 'sit amet',
-      });
+            expect(runner.data[1].body).to.deep.equal({
+                text: 'dolor',
+                text2: 'sit amet'
+            });
 
-      expect(runner.errors.length).to.equal(0);
-      expect(runner.snapshot).to.be.undefined;
-      done();
+            expect(runner.errors.length).to.equal(0);
+            expect(runner.snapshot).to.be.undefined;
+            done();
+        });
     });
-  });
 
-/*
-  it('should parse simple string rows with placeholder in url', (done) => {
-    const cfg = {
-      returnAsAttachment: true,
-      reader: {
-        columns: [
-          {
-            property: 'text',
-          },
-          {
-            property: 'text2',
-          },
-        ],
-      },
-      url: 'http://test.env.mock/simple_{placeholder1}_{placeholder2}.csv',
-      username: 'user',
-      password: 'pass',
-    };
+    it('should parse simple date rows', function simpleDataRowsTest(done) {
 
-    const msg = {};
-    msg.body = {
-      placeholder1: 'value1',
-      placeholder2: 'value2',
-    };
+        let msg = {};
 
-    runTest(readAction.process, msg, cfg, (runner) => {
-      expect(runner.data.length).to.equal(2);
+        let cfg = {
+            reader: {
+                columns: [
+                    {
+                        property: 'time',
+                        type: 'date',
+                        format: 'DD/MM/YYYY HH:mm:ss'
+                    },
+                    {
+                        property: 'time2',
+                        type: 'date',
+                        format: 'YYYY-MM-DDTHH:mm:ss Z'
+                    },
+                    {
+                        property: 'time3',
+                        type: 'date',
+                        format: 'YYYY-MM-DD HH:mm:ss Z'
+                    }
+                ]
+            },
+            url: 'http://test.env.mock/dates.csv'
+        };
 
-      expect(runner.data[0].body).to.deep.equal({
-        text: 'placeholder1',
-        text2: 'value1',
-      });
+        runTest(csv.process, msg, cfg, function simpleDataRowsTestAssertions(runner) {
+            expect(runner.data.length).to.equal(1);
 
-      expect(runner.data[1].body).to.deep.equal({
-        text: 'placeholder2',
-        text2: 'value2',
-      });
+            let body = runner.data[0].body;
 
-      expect(runner.errors.length).to.equal(0);
-      expect(runner.snapshot).to.be.undefined;
-      done();
+            expectDate(body.time, 2013, 7, 13, 25, 55);
+            expectDate(body.time2, 2013, 7, 14, 12, 5);
+            expectDate(body.time3, 2013, 7, 15, 45, 36);
+
+            expect(runner.errors.length).to.equal(0);
+            expect(runner.snapshot).to.be.undefined;
+
+            done();
+
+        });
     });
-  });
-*/
 
-  it('should parse simple date rows', (done) => {
-    const msg = {};
 
-    const cfg = {
-      reader: {
-        columns: [
-          {
-            property: 'time',
-            type: 'date',
-            format: 'DD/MM/YYYY HH:mm:ss',
-          },
-          {
-            property: 'time2',
-            type: 'date',
-            format: 'YYYY-MM-DDTHH:mm:ss Z',
-          },
-          {
-            property: 'time3',
-            type: 'date',
-            format: 'YYYY-MM-DD HH:mm:ss Z',
-          },
-        ],
-      },
-      url: 'http://test.env.mock/dates.csv',
-    };
+    it('should parse simple number rows', function simpleNumberRowsTest(done) {
 
-    runTest(csv.process, msg, cfg, (runner) => {
-      expect(runner.data.length).to.equal(1);
+        let msg = {};
 
-      const { body } = runner.data[0];
+        let cfg = {
+            reader: {
+                columns: [
+                    {
+                        property: 'simpleInt',
+                        type: 'number'
+                    },
+                    {
+                        property: 'pi',
+                        type: 'number',
+                        format: 'dec_comma'
+                    },
+                    {
+                        property: 'euler',
+                        type: 'number',
+                        format: 'dec_point'
+                    }
+                ]
+            },
+            url: 'http://test.env.mock/numbers.csv'
+        };
 
-      expectDate(body.time, 2013, 7, 13, 25, 55);
-      expectDate(body.time2, 2013, 7, 14, 12, 5);
-      expectDate(body.time3, 2013, 7, 15, 45, 36);
+        runTest(csv.process, msg, cfg, function simpleNumberRowsTestAssertions(runner) {
+            expect(runner.data.length).to.equal(1);
 
-      expect(runner.errors.length).to.equal(0);
-      expect(runner.snapshot).to.be.undefined;
+            let body = runner.data[0].body;
 
-      done();
+            expect(body.simpleInt).to.equal(123);
+
+            expect(body.pi).to.equal(3.14159265359);
+
+            expect(body.euler).to.equal(2.71828);
+
+            expect(runner.errors.length).to.equal(0);
+            expect(runner.snapshot).to.be.undefined;
+
+            done();
+        });
     });
-  });
 
+    it('should parse US numbers', function usNumbersTest(done) {
 
-  it('should parse simple number rows', (done) => {
-    const msg = {};
+        let msg = {};
 
-    const cfg = {
-      reader: {
-        columns: [
-          {
-            property: 'simpleInt',
-            type: 'number',
-          },
-          {
-            property: 'pi',
-            type: 'number',
-            format: 'dec_comma',
-          },
-          {
-            property: 'euler',
-            type: 'number',
-            format: 'dec_point',
-          },
-        ],
-      },
-      url: 'http://test.env.mock/numbers.csv',
-    };
+        let cfg = {
+            reader: {
+                columns: [
+                    {
+                        property: 'simpleInt',
+                        type: 'number',
+                        format: 'dec_point'
+                    },
+                    {
+                        property: 'doubleValue',
+                        type: 'number',
+                        format: 'dec_point'
+                    }
+                ]
+            },
+            url: 'http://test.env.mock/numbers_us.csv'
+        };
 
-    runTest(csv.process, msg, cfg, (runner) => {
-      expect(runner.data.length).to.equal(1);
+        runTest(csv.process, msg, cfg, function usNumbersTestAssertions(runner) {
+            expect(runner.data.length).to.equal(1);
 
-      const { body } = runner.data[0];
+            let body = runner.data[0].body;
 
-      expect(body.simpleInt).to.equal(123);
+            expect(body.simpleInt).to.equal(123456);
 
-      expect(body.pi).to.equal(3.14159265359);
+            expect(body.doubleValue).to.equal(123456.789);
 
-      expect(body.euler).to.equal(2.71828);
+            expect(runner.errors.length).to.equal(0);
+            expect(runner.snapshot).to.be.undefined;
 
-      expect(runner.errors.length).to.equal(0);
-      expect(runner.snapshot).to.be.undefined;
-
-      done();
+            done();
+        });
     });
-  });
 
-  it('should parse US numbers', (done) => {
-    const msg = {};
+    it('should parse DE numbers', function deNumbersTest(done) {
+        let msg = {};
 
-    const cfg = {
-      reader: {
-        columns: [
-          {
-            property: 'simpleInt',
-            type: 'number',
-            format: 'dec_point',
-          },
-          {
-            property: 'doubleValue',
-            type: 'number',
-            format: 'dec_point',
-          },
-        ],
-      },
-      url: 'http://test.env.mock/numbers_us.csv',
-    };
+        let cfg = {
+            reader: {
+                columns: [
+                    {
+                        property: 'simpleInt',
+                        type: 'number',
+                        format: 'dec_comma'
+                    },
+                    {
+                        property: 'doubleValue',
+                        type: 'number',
+                        format: 'dec_comma'
+                    },
+                    {
+                        property: 'doubleValue2',
+                        type: 'number',
+                        format: 'dec_comma'
+                    }
+                ]
+            },
+            url: 'http://test.env.mock/numbers_de.csv'
+        };
 
-    runTest(csv.process, msg, cfg, (runner) => {
-      expect(runner.data.length).to.equal(1);
+        runTest(csv.process, msg, cfg, function deNumbersTestAssertions(runner) {
+            expect(runner.data.length).to.equal(1);
 
-      const { body } = runner.data[0];
+            let body = runner.data[0].body;
 
-      expect(body.simpleInt).to.equal(123456);
+            expect(body.simpleInt).to.equal(123456);
 
-      expect(body.doubleValue).to.equal(123456.789);
+            expect(body.doubleValue).to.equal(123456.789);
 
-      expect(runner.errors.length).to.equal(0);
-      expect(runner.snapshot).to.be.undefined;
+            expect(body.doubleValue2).to.equal(111222333);
 
-      done();
+            expect(runner.errors.length).to.equal(0);
+            expect(runner.snapshot).to.be.undefined;
+
+            done();
+        });
     });
-  });
 
-  it('should parse DE numbers', (done) => {
-    const msg = {};
-
-    const cfg = {
-      reader: {
-        columns: [
-          {
-            property: 'simpleInt',
-            type: 'number',
-            format: 'dec_comma',
-          },
-          {
-            property: 'doubleValue',
-            type: 'number',
-            format: 'dec_comma',
-          },
-          {
-            property: 'doubleValue2',
-            type: 'number',
-            format: 'dec_comma',
-          },
-        ],
-      },
-      url: 'http://test.env.mock/numbers_de.csv',
-    };
-
-    runTest(csv.process, msg, cfg, (runner) => {
-      expect(runner.data.length).to.equal(1);
-
-      const { body } = runner.data[0];
-
-      expect(body.simpleInt).to.equal(123456);
-
-      expect(body.doubleValue).to.equal(123456.789);
-
-      expect(body.doubleValue2).to.equal(111222333);
-
-      expect(runner.errors.length).to.equal(0);
-      expect(runner.snapshot).to.be.undefined;
-
-      done();
-    });
-  });
 });

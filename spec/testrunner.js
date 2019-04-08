@@ -1,27 +1,27 @@
+'use strict';
 
-
-const events = require('events');
-const util = require('util');
+let events = require('events');
+let util = require('util');
 
 function TestRunner(cb) {
-  const that = this;
-  events.EventEmitter.call(this);
-  this.on('end', () => {
-    console.log('Ended!');
-    cb(that);
-  });
-  this.data = [];
-  this.on('data', (data) => {
-    that.data.push(data);
-  });
-  this.errors = [];
-  this.on('error', (err) => {
-    that.errors.push(err);
-  });
-  this.snapshot = undefined;
-  this.on('snapshot', (snapshot) => {
-    that.snapshot = snapshot;
-  });
+    let that = this;
+    events.EventEmitter.call(this);
+    this.on('end', function onEnd() {
+        console.log('Ended!');
+        cb(that);
+    });
+    this.data = [];
+    this.on('data', function onData(data) {
+        that.data.push(data);
+    });
+    this.errors = [];
+    this.on('error', function onError(err) {
+        that.errors.push(err);
+    });
+    this.snapshot = undefined;
+    this.on('snapshot', function onSnapshot(snapshot) {
+        that.snapshot = snapshot;
+    });
 }
 
 util.inherits(TestRunner, events.EventEmitter);
@@ -35,6 +35,6 @@ TestRunner.prototype.error = console.error;
 TestRunner.prototype.warn = console.log;
 
 exports.runTest = function runTest(func, msg, cfg, callback, snapshot) {
-  const runner = new TestRunner(callback);
-  func.call(runner, msg, cfg, undefined, snapshot);
+    let runner = new TestRunner(callback);
+    func.call(runner, msg, cfg, undefined, snapshot);
 };
