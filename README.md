@@ -29,6 +29,12 @@ This trigger will fetch the CSV file from a given URL. The address must be acces
 to the component. The fetched CSV file will be placed in the attachment part of the
 outgoing message.
 
+#### Limitations
+
+Recommended parameters for CSV file to read: not more 25k lines of content with size 
+not more then more then 1 kB per line. Current component version can't grantee more then 100/sec
+message emits.
+
 ## Actions
 
 ### Read CSV attachment
