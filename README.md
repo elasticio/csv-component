@@ -31,9 +31,12 @@ outgoing message.
 
 #### Limitations
 
-Recommended parameters for CSV file to read: not more 25k lines of content with size 
-not more then more then 1 kB per line. Current component version can't grantee more then 100/sec
-message emits.
+Recommended parameters for CSV file to read: 
+
+- not more then 25 000 lines of content per file
+- line size is not more then 1 kB per line. 
+
+Current component version can not guarantee successful component execution with more then 100 message emits per 1 sec.
 
 ## Actions
 
