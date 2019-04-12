@@ -13,7 +13,7 @@ attachment. It can also write a CSV file from the incoming events.
 
 ## Environment variables
 
-Component is not using any environment variables.
+Component does not has any required environment variables, but we suggest to use `EIO_REQUIRED_RAM_MB` - recommended value of allocated memory is `512` MB
 
 
 ## Credentials
@@ -30,10 +30,6 @@ to the component. The fetched CSV file will be placed in the attachment part of 
 outgoing message.
 
 #### Limitations
-
-Recommended parameters for CSV file to read: not more 25k lines of content with size 
-not more then more then 1 kB per line. Current component version can't grantee more then 100/sec
-message emits.
 
 ## Actions
 
