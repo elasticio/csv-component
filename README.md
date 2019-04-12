@@ -31,9 +31,8 @@ outgoing message.
 
 #### Limitations
 
-Recommended parameters for CSV file to read: not more 25k lines of content with size 
-not more then more then 1 kB per line. Current component version can't grantee more then 100/sec
-message emits.
+You may get `Component run out of memory and terminated.` error during run-time, that means that component needs more memory, please add
+ `EIO_REQUIRED_RAM_MB` Environment variables for csv-component in this case.
 
 ## Actions
 
