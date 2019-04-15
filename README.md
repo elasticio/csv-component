@@ -31,6 +31,9 @@ outgoing message.
 
 #### Limitations
 
+You may get `Component run out of memory and terminated.` error during run-time, that means that component needs more memory, please add
+ `EIO_REQUIRED_RAM_MB` Environment variables for csv-component in this case.
+
 ## Actions
 
 ### Read CSV attachment
