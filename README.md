@@ -13,7 +13,7 @@ attachment. It can also write a CSV file from the incoming events.
 
 ## Environment variables
 
-Component is not using any environment variables.
+Component does not has any required environment variables, but we suggest to use `EIO_REQUIRED_RAM_MB` - recommended value of allocated memory is `512` MB
 
 
 ## Credentials
@@ -28,6 +28,11 @@ The component does not require credentials to function.
 This trigger will fetch the CSV file from a given URL. The address must be accessible
 to the component. The fetched CSV file will be placed in the attachment part of the
 outgoing message.
+
+#### Limitations
+
+You may get `Component run out of memory and terminated.` error during run-time, that means that component needs more memory, please add
+ `EIO_REQUIRED_RAM_MB` Environment variables for csv-component in this case.
 
 ## Actions
 
@@ -61,6 +66,7 @@ for that cell. All other properties will be ignored. For example, headers
 ```
 
 will produce the following `.csv` file:
+
 ```
 foo,bar
 myfoo,mybar
