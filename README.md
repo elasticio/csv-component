@@ -13,7 +13,7 @@ attachment. It can also write a CSV file from the incoming events.
 
 ## Environment variables
 
-Component is not using any environment variables.
+Component does not has any required environment variables, but we suggest to use `EIO_REQUIRED_RAM_MB` - recommended value of allocated memory is `512` MB
 
 
 ## Credentials
