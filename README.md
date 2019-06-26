@@ -29,13 +29,6 @@ This trigger will fetch the CSV file from a given URL. The address must be acces
 to the component. The fetched CSV file will be placed in the attachment part of the
 outgoing message.
 
-#### Limitations
-
-1. You may get `Component run out of memory and terminated.` error during run-time, that means that component needs more memory, please add
- `EIO_REQUIRED_RAM_MB` Environment variables for csv-component in this case.
-2. Maximal possible size for attachment is 10 Mb.
-3. Attachments mechanism does NOT work with  [Local Agent Installation](https://support.elastic.io/support/solutions/articles/14000076461-announcing-the-local-agent-)
-
 ## Actions
 
 ### Read CSV attachment
@@ -85,3 +78,11 @@ is specific to a locale, the JSONata expression should handle that concern.
 The output of the CSV Write component will be a message with an attachment.  In
 order to access this attachment, the component following the CSV Write must be
 able to handle file attachments.
+
+### Limitations
+
+1. You may get `Component run out of memory and terminated.` error during run-time, that means that component needs more memory, please add
+ `EIO_REQUIRED_RAM_MB` Environment variables for csv-component in this case.
+2. Maximal possible size for attachment is 10 Mb.
+3. Attachments mechanism does NOT work with  [Local Agent Installation](https://support.elastic.io/support/solutions/articles/14000076461-announcing-the-local-agent-)
+
