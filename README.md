@@ -13,8 +13,10 @@ attachment. It can also write a CSV file from the incoming events.
 
 ## Environment variables
 
-Component does not has any required environment variables, but we suggest to use `EIO_REQUIRED_RAM_MB` - recommended value of allocated memory is `512` MB
-
+1. `EIO_REQUIRED_RAM_MB` - recommended value of allocated memory is `512` MB
+2. `REQUEST_TIMEOUT` - HTTP request timeout in milliseconds, default value 60000
+3. `REQUEST_MAX_RETRY` - number of HTTP request retry attempts, default value 3
+4. `REQUEST_MAX_CONTENT_LENGTH`  - max size of http request in bytes, default value: 1048576
 
 ## Credentials
 
