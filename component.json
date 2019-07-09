@@ -29,6 +29,10 @@
       "main": "./lib/read.js",
       "title": "Read CSV attachment",
       "fields": {
+        "emitAll": {
+          "label": "Emit all messages",
+          "viewClass": "CheckBoxView"
+        },
         "reader": {
           "viewClass": "CSVReadView",
           "required": true
