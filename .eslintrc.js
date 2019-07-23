@@ -8,7 +8,7 @@ const NEVER = 'never';
 
 module.exports = {
     'parserOptions': {
-        ecmaVersion: 2019
+        ecmaVersion: 2017
     },
     'env': {
         es6: true,
