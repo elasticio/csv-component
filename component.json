@@ -52,12 +52,12 @@
           "label" : "Include Headers",
           "required": false,
           "viewClass" : "SelectView",
-          "note" : "Default Yes",
+          "description" : "Default Yes",
           "model": {
             "Yes" : "Yes",
             "No" : "No"
           },
-          "promt": "Include headers? Default Yes."
+          "prompt": "Include headers? Default Yes."
         },
         "writer": {
           "viewClass": "CSVWriteView"
