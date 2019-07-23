@@ -52,6 +52,7 @@
           "label" : "Include Headers",
           "required": false,
           "viewClass" : "SelectView",
+          "note" : "Default Yes",
           "model": {
             "Yes" : "Yes",
             "No" : "No"
