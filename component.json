@@ -33,16 +33,6 @@
           "label": "Emit all messages",
           "viewClass": "CheckBoxView"
         },
-        "includeHeaders": {
-          "label" : "Include Headers",
-          "required": false,
-          "viewClass" : "SelectView",
-          "model": {
-            "Yes" : "Yes",
-            "No" : "No"
-          },
-          "promt": "Include headers? Default Yes."
-        },
         "reader": {
           "viewClass": "CSVReadView",
           "required": true
@@ -58,6 +48,16 @@
       "main": "./lib/actions/write.js",
       "title": "Write CSV attachment",
       "fields": {
+        "includeHeaders": {
+          "label" : "Include Headers",
+          "required": false,
+          "viewClass" : "SelectView",
+          "model": {
+            "Yes" : "Yes",
+            "No" : "No"
+          },
+          "promt": "Include headers? Default Yes."
+        },
         "writer": {
           "viewClass": "CSVWriteView"
         }
