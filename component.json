@@ -33,6 +33,16 @@
           "label": "Emit all messages",
           "viewClass": "CheckBoxView"
         },
+        "includeHeaders": {
+          "label" : "Include Headers",
+          "required": false,
+          "viewClass" : "SelectView",
+          "model": {
+            "Yes" : "Yes",
+            "No" : "No"
+          },
+          "promt": "Include headers? Default Yes."
+        },
         "reader": {
           "viewClass": "CSVReadView",
           "required": true
