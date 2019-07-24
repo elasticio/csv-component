@@ -15,9 +15,10 @@ attachment. It can also write a CSV file from the incoming events.
 
 1. `EIO_REQUIRED_RAM_MB` - recommended value of allocated memory is `512` MB
 2. `REQUEST_TIMEOUT` - HTTP request timeout in milliseconds, default value 10000
-3. `REQUEST_RETRY_DELAY` - delay between retry attempts in milliseconds, default value 5000
-4. `REQUEST_MAX_RETRY` - number of HTTP request retry attempts, default value 3
+3. `REQUEST_RETRY_DELAY` - delay between retry attempts in milliseconds, default value 7000
+4. `REQUEST_MAX_RETRY` - number of HTTP request retry attempts, default value 7
 5. `REQUEST_MAX_CONTENT_LENGTH`  - max size of http request in bytes, default value: 1048576
+6. `TIMEOUT_BETWEEN_EVENTS` - number of milliseconds write action wait before creating separate attachments, default value: 10000
 
 ## Credentials
 
@@ -98,5 +99,6 @@ able to handle file attachments.
 
 1. You may get `Component run out of memory and terminated.` error during run-time, that means that component needs more memory, please add
  `EIO_REQUIRED_RAM_MB` environment variable with an appropriate value (e.g. value `512` means that 512 MB will be allocated) for the component in this case.
-2. Maximal possible size for an attachment is 10 MB.
-3. Attachments mechanism does not work with [Local Agent Installation](https://support.elastic.io/support/solutions/articles/14000076461-announcing-the-local-agent-)
+2. You may get `Error: write after end` error, as a current workaround try increase value of environment variable: `TIMEOUT_BETWEEN_EVENTS`. 
+3. Maximal possible size for an attachment is 10 MB.
+4. Attachments mechanism does not work with [Local Agent Installation](https://support.elastic.io/support/solutions/articles/14000076461-announcing-the-local-agent-)
