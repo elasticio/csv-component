@@ -17,7 +17,7 @@ attachment. It can also write a CSV file from the incoming events.
 2. `REQUEST_TIMEOUT` - HTTP request timeout in milliseconds, default value 10000
 3. `REQUEST_RETRY_DELAY` - delay between retry attempts in milliseconds, default value 7000
 4. `REQUEST_MAX_RETRY` - number of HTTP request retry attempts, default value 7
-5. `REQUEST_MAX_CONTENT_LENGTH`  - max size of http request in bytes, default value: 1048576
+5. `REQUEST_MAX_CONTENT_LENGTH`  - max size of http request in bytes, default value: 104857600
 6. `TIMEOUT_BETWEEN_EVENTS` - number of milliseconds write action wait before creating separate attachments, default value: 10000
 
 ## Credentials
@@ -59,6 +59,8 @@ a `JSON` object. To configure this action the following fields can be used:
 
 
 ### Write CSV attachment
+
+* `Include Header` - this select configures output behavior of the component. If option is `Yes` or no value chosen than header of csv file will be written to attachment, this is default behavior. If value `No` selected than csv header will be omitted from attachment.
 
 This action will combine multiple incoming events into a CSV file until there is a gap
 of more than 10 seconds between events. Afterwards, the CSV file will be closed
