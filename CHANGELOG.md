@@ -1,3 +1,7 @@
+## 1.1.5 (July 15, 2019)
+
+* Add retries mechanism to all request, refactor component to use axios library
+
 ## 1.1.4 (June 27, 2019)
 
 * Added emitAll feature for CSV Write action

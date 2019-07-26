@@ -48,6 +48,17 @@
       "main": "./lib/actions/write.js",
       "title": "Write CSV attachment",
       "fields": {
+        "includeHeaders": {
+          "label" : "Include Headers",
+          "required": false,
+          "viewClass" : "SelectView",
+          "description" : "Default Yes",
+          "model": {
+            "Yes" : "Yes",
+            "No" : "No"
+          },
+          "prompt": "Include headers? Default Yes."
+        },
         "writer": {
           "viewClass": "CSVWriteView"
         }
