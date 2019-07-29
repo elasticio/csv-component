@@ -17,7 +17,7 @@ attachment. It can also write a CSV file from the incoming events.
 2. `REQUEST_TIMEOUT` - HTTP request timeout in milliseconds, default value 10000
 3. `REQUEST_RETRY_DELAY` - delay between retry attempts in milliseconds, default value 7000
 4. `REQUEST_MAX_RETRY` - number of HTTP request retry attempts, default value 7
-5. `REQUEST_MAX_CONTENT_LENGTH`  - max size of http request in bytes, default value: 104857600
+5. `REQUEST_MAX_CONTENT_LENGTH`  - max size of http request in bytes, default value: 10485760
 6. `TIMEOUT_BETWEEN_EVENTS` - number of milliseconds write action wait before creating separate attachments, default value: 10000
 
 ## Credentials
