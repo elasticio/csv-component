@@ -36,7 +36,7 @@
     "elasticio-rest-node": "1.2.3",
     "elasticio-sailor-nodejs": "2.2.3",
     "lodash": "4.17.13",
-    "moment": "2.19.3",
+    "moment": "2.24.0",
     "node-uuid": "1.4.3",
     "q": "1.4.1",
     "stream": "0.0.2",
