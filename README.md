@@ -1,3 +1,4 @@
+[![CircleCI](https://circleci.com/gh/elasticio/csv-component.svg?style=svg)](https://circleci.com/gh/elasticio/csv-component)
 # CSV Component
 
 ## Description
