@@ -1,3 +1,7 @@
+## 1.1.6 (September 10, 2019)
+
+* Migrate from TravisCI to CircleCI
+
 ## 1.1.5 (July 15, 2019)
 
 * Add retries mechanism to all request, refactor component to use axios library
