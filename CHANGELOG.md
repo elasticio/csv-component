@@ -1,3 +1,7 @@
+## 2.0.0 (October 3, 2019)
+
+* Remove generators, improve eslint
+
 ## 1.1.6 (September 10, 2019)
 
 * Migrate from TravisCI to CircleCI
