@@ -47,7 +47,7 @@ describe('CSV Write component', function () {
     };
   });
 
-  it('should parse simple string rows', async () => {
+  it('should write csv rows', async () => {
     await write.init(cfg);
 
     const msg1 = {
