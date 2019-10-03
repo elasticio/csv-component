@@ -8,6 +8,11 @@ const sinon = require('sinon');
 chai.use(chaiAsPromised);
 const { expect } = require('chai');
 
+if (fs.existsSync('.env')) {
+  // eslint-disable-next-line global-require
+  require('dotenv').config();
+}
+
 const write = require('../lib/actions/write.js');
 
 describe('CSV Write component', function () {
@@ -16,18 +21,7 @@ describe('CSV Write component', function () {
   let emitter;
   let cfg;
 
-  beforeEach(() => {
-    emitter = {
-      emit: sinon.spy(),
-    };
-  });
-
-  before(() => {
-    if (fs.existsSync('.env')) {
-      // eslint-disable-next-line global-require
-      require('dotenv').config();
-    }
-
+  before(async () => {
     cfg = {
       writer: {
         columns: [
@@ -37,17 +31,24 @@ describe('CSV Write component', function () {
       },
     };
 
-    nock('http://api-service.platform.svc.cluster.local.:9000/', { encodedQueryParams: true })
+    nock('https://api.elastic.io', { encodedQueryParams: true })
       .post('/v2/resources/storage/signed-url')
-      .reply(200, { put_url: 'https://examlple.mock/putUrl', get_url: 'https://examlple.mock/getUrl' });
+      .reply(200,
+        { put_url: 'https://examlple.mock/putUrl', get_url: 'https://examlple.mock/getUrl' });
 
     nock('https://examlple.mock')
       .put('/putUrl')
       .reply(200, {});
   });
 
-  it('should parse simple string rows', async (done) => {
-    // await write.init(cfg);
+  beforeEach(() => {
+    emitter = {
+      emit: sinon.spy(),
+    };
+  });
+
+  it('should parse simple string rows', async () => {
+    await write.init(cfg);
 
     const msg1 = {
       body: {
@@ -59,7 +60,8 @@ describe('CSV Write component', function () {
         },
       },
     };
-    // await write.process.call(emitter, msg1, cfg);
+
+    await write.process.call(emitter, msg1, cfg);
 
     const msg2 = {
       body: {
@@ -71,13 +73,11 @@ describe('CSV Write component', function () {
         },
       },
     };
-    // await write.process.call(emitter, msg2, cfg);
+    await write.process.call(emitter, msg2, cfg);
 
-    // expect(emitter.emit.getCalls().length).to.equal(2);
+    expect(emitter.emit.getCalls().length).to.equal(2);
 
-    // await new Promise(resolve => setTimeout(resolve, 12000));
-    // expect(emitter.emit.getCalls().length).to.equal(3);
-
-    done();
+    await new Promise(resolve => setTimeout(resolve, 12000));
+    expect(emitter.emit.getCalls().length).to.equal(3);
   });
 });
