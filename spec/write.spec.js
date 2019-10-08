@@ -11,6 +11,9 @@ const { expect } = require('chai');
 if (fs.existsSync('.env')) {
   // eslint-disable-next-line global-require
   require('dotenv').config();
+} else {
+  process.env.ELASTICIO_API_USERNAME = 'name';
+  process.env.ELASTICIO_API_KEY = 'key';
 }
 
 const write = require('../lib/actions/write.js');
