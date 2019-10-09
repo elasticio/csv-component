@@ -1,10 +1,10 @@
 {
   "name": "csv-component",
-  "version": "1.1.6",
+  "version": "2.0.0",
   "description": "CSV Component for elastic.io platform",
   "main": "index.js",
   "scripts": {
-    "pretest": "eslint spec spec-integration --fix",
+    "pretest": "eslint lib/ spec spec-integration --fix",
     "test": "mocha spec",
     "integration-test": "mocha spec-integration"
   },
@@ -39,14 +39,19 @@
     "moment": "2.24.0",
     "node-uuid": "1.4.3",
     "q": "1.4.1",
+    "sinon": "^7.5.0",
     "stream": "0.0.2",
     "underscore": "1.8.3"
   },
   "devDependencies": {
-    "chai": "4.1.1",
-    "eslint": "5.10.0",
+    "chai": "4.2.0",
+    "chai-as-promised": "7.1.1",
+    "dotenv": "5.0.0",
+    "eslint": "5.16.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.17.3",
     "eslint-plugin-mocha": "6.0.0",
-    "mocha": "3.2.0",
+    "mocha": "6.1.4",
     "nock": "9.0.13"
   }
 }
