@@ -1,3 +1,7 @@
+## 2.0.1 (October 10, 2019)
+
+* Hotfix Action path
+
 ## 2.0.0 (October 3, 2019)
 
 * Remove generators, improve eslint
