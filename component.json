@@ -4,7 +4,7 @@
   "docsUrl": "https://github.com/elasticio/csv-component",
   "triggers": {
     "read": {
-      "main": "./lib/read.js",
+      "main": "./lib/triggers/read.js",
       "title": "Read CSV file from URL",
       "type": "polling",
       "fields": {
@@ -26,7 +26,7 @@
   },
   "actions" : {
     "read_action": {
-      "main": "./lib/triggers/read.js",
+      "main": "./lib/actions/write.js",
       "title": "Read CSV attachment",
       "fields": {
         "emitAll": {
