@@ -59,6 +59,11 @@
           },
           "prompt": "Include headers? Default Yes."
         },
+        "filename": {
+          "label" : "File Name",
+          "required": false,
+          "viewClass" : "TextFieldView"
+        },
         "writer": {
           "viewClass": "CSVWriteView"
         }
