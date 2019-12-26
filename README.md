@@ -13,14 +13,15 @@ attachment. It can also write a CSV file from the incoming events.
 ## Requirements
 
 ## Environment variables
-
-1. `EIO_REQUIRED_RAM_MB` - recommended value of allocated memory is `512` MB
-2. `REQUEST_TIMEOUT` - HTTP request timeout in milliseconds, default value 10000
-3. `REQUEST_RETRY_DELAY` - delay between retry attempts in milliseconds, default value 7000
-4. `REQUEST_MAX_RETRY` - number of HTTP request retry attempts, default value 7
-5. `REQUEST_MAX_CONTENT_LENGTH`  - max size of http request in bytes, default value: 10485760
-6. `TIMEOUT_BETWEEN_EVENTS` - number of milliseconds write action wait before creating separate attachments, default value: 10000
-7. `LOG_LEVEL` - `trace` | `debug` | `info` | `warning` | `error` controls logger level
+Name|Mandatory|Description|Values|
+|----|---------|-----------|------|
+|EIO_REQUIRED_RAM_MB| false | Value of allocated memory to component | Recommended: 512 |
+|REQUEST_TIMEOUT| false |  HTTP request timeout in milliseconds | Default value: 10000 |
+|REQUEST_RETRY_DELAY| false | Delay between retry attempts in milliseconds | Default value: 7000 |
+|REQUEST_MAX_RETRY| false | Number of HTTP request retry attempts |  Default value: 7 |
+|REQUEST_MAX_CONTENT_LENGTH| false | Max size of http request in bytes | Default value: 10485760 |
+|TIMEOUT_BETWEEN_EVENTS| false | Number of milliseconds write action wait before creating separate attachments | Default value: 10000 |
+|LOG_LEVEL| false | Level of logger verbosity | trace, debug, info, warning, error Default: info |
 
 ## Credentials
 
