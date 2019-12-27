@@ -1,3 +1,10 @@
+## 2.0.2 (December 24, 2019)
+
+* Update sailor version to 2.5.4
+* Update component to use logger
+* Update buildType to docker
+* Fixed bug with invalid path to read action
+
 ## 2.0.1 (October 10, 2019)
 
 * Hotfix Action path

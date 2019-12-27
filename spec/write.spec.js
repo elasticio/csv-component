@@ -4,6 +4,7 @@ const chaiAsPromised = require('chai-as-promised');
 const fs = require('fs');
 const nock = require('nock');
 const sinon = require('sinon');
+const logger = require('@elastic.io/component-logger')();
 
 chai.use(chaiAsPromised);
 const { expect } = require('chai');
@@ -21,7 +22,7 @@ const write = require('../lib/actions/write.js');
 describe('CSV Write component', function () {
   this.timeout(15000);
 
-  let emitter;
+  let emit;
   let cfg;
 
   before(async () => {
@@ -45,13 +46,13 @@ describe('CSV Write component', function () {
   });
 
   beforeEach(() => {
-    emitter = {
-      emit: sinon.spy(),
-    };
+    emit = sinon.spy();
   });
 
   it('should write csv rows', async () => {
-    await write.init(cfg);
+    await write.init.call({
+      logger,
+    }, cfg);
 
     const msg1 = {
       body: {
@@ -64,7 +65,10 @@ describe('CSV Write component', function () {
       },
     };
 
-    await write.process.call(emitter, msg1, cfg);
+    await write.process.call({
+      emit,
+      logger,
+    }, msg1, cfg);
 
     const msg2 = {
       body: {
@@ -76,11 +80,11 @@ describe('CSV Write component', function () {
         },
       },
     };
-    await write.process.call(emitter, msg2, cfg);
+    await write.process.call({ emit, logger }, msg2, cfg);
 
-    expect(emitter.emit.getCalls().length).to.equal(2);
+    expect(emit.getCalls().length).to.equal(2);
 
     await new Promise(resolve => setTimeout(resolve, 12000));
-    expect(emitter.emit.getCalls().length).to.equal(3);
+    expect(emit.getCalls().length).to.equal(3);
   });
 });

@@ -1,5 +1,6 @@
 const events = require('events');
 const util = require('util');
+const logger = require('@elastic.io/component-logger')();
 
 function TestRunner(cb) {
   const that = this;
@@ -23,14 +24,7 @@ function TestRunner(cb) {
 }
 
 util.inherits(TestRunner, events.EventEmitter);
-
-TestRunner.prototype.info = console.log;
-
-TestRunner.prototype.debug = console.log;
-
-TestRunner.prototype.error = console.error;
-
-TestRunner.prototype.warn = console.log;
+TestRunner.prototype.logger = logger;
 
 exports.runTest = function runTest(func, msg, cfg, callback, snapshot) {
   const runner = new TestRunner(callback);
