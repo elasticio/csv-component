@@ -66,8 +66,47 @@
       },
       "metadata": {
         "in": {
-            "type": "object",
-            "properties": {}
+          "type": "object",
+          "properties": {}
+        },
+        "out": {}
+      }
+    },
+    "write_attachment_from_json": {
+      "description":
+      "Multiple incoming events can be combined into one CSV file with the write CSV action.  See https://github.com/elasticio/csv-component/ for additional documentation.",
+      "main": "./lib/actions/writeFromJson.js",
+      "title": "Write CSV attachment from JSON",
+      "fields": {
+        "includeHeaders": {
+          "label" : "Include Headers",
+          "required": true,
+          "viewClass" : "SelectView",
+          "description" : "Default Yes",
+          "model": {
+            "Yes" : "Yes",
+            "No" : "No"
+          },
+          "prompt": "Include headers? Default Yes"
+        },
+        "separator": {
+          "label" : "Separators",
+          "required": true,
+          "viewClass" : "SelectView",
+          "description" : "Default Yes",
+          "model": {
+            "comma" : "Comma (,)",
+            "semicolon" : "Semicolon (;)",
+            "space": "Space ( )",
+            "tab": "Tab (\\t)"
+          },
+          "prompt": "Choose required CSV delimiter"
+        }
+      },
+      "metadata": {
+        "in": {
+          "type": "object",
+          "properties": {}
         },
         "out": {}
       }
