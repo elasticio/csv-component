@@ -57,8 +57,8 @@ describe('CSV Write From Array component', function () {
           CategoryGroup_1: 'text12',
         },
         {
-          ProductKey: 'text11',
-          CategoryGroup_1: 'text12',
+          ProductKey: 'text21',
+          CategoryGroup_1: 'text22',
         }],
     };
 
