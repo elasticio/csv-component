@@ -134,6 +134,41 @@ The output of the CSV Write component will be a message with an attachment.  In
 order to access this attachment, the component following the CSV Write must be
 able to handle file attachments.
 
+### Write CSV attachment from Array
+
+* `Include Header` - this select configures output behavior of the component. If option is `Yes` or no value chosen than header of csv file will be written to attachment, this is default behavior. If value `No` selected than csv header will be omitted from attachment.
+* `Separator` - this select configures type of CSV delimiter in an output file. There are next options: `Comma (,)`, `Semicolon (;)`, `Space ( )`, `Tab (\t)`. 
+
+This action will convert an incoming array into a CSV file.
+
+The columns of the CSV file will be mapped with same names as keys in the input JSON body.
+The requirement for an input Array - each JSON object inside should be plain without nested complex objects and similar to each other. 
+The keys of an input JSON will be published as the header in the first row. For each incoming
+event, the value for each header will be `stringified` and written as the value
+for that cell. All other properties will be ignored. For example, headers
+`foo,bar` along with the following JSON events:
+
+```
+[
+{"foo":"myfoo", "bar":"mybar"},
+{"foo":"myfoo", "bar":[1,2]},
+{"bar":"mybar", "baz":"mybaz"}
+]
+```
+
+will produce the following `.csv` file:
+
+```
+foo,bar
+myfoo,mybar
+myfoo,"[1,2]"
+,mybar
+```
+
+The output of the CSV Write component will be a message with an attachment.  In
+order to access this attachment, the component following the CSV Write must be
+able to handle file attachments.
+
 ### Limitations
 
 1. You may get `Component run out of memory and terminated.` error during run-time, that means that component needs more memory, please add
