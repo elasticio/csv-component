@@ -2,7 +2,7 @@
   "title": "CSV",
   "description": "A comma-separated values (CSV) file stores tabular data (numbers and text) in plain-text form",
   "docsUrl": "https://github.com/elasticio/csv-component",
-  "buildType" : "docker",
+  "buildType": "docker",
   "triggers": {
     "read": {
       "main": "./lib/triggers/read.js",
@@ -25,7 +25,7 @@
       }
     }
   },
-  "actions" : {
+  "actions": {
     "read_action": {
       "main": "./lib/triggers/read.js",
       "title": "Read CSV attachment",
@@ -43,7 +43,7 @@
         "out": {}
       }
     },
-    "write_attachment": {,
+    "write_attachment": {
       "main": "./lib/actions/write.js",
       "title": "Write CSV attachment",
       "help": {
@@ -52,13 +52,13 @@
       },
       "fields": {
         "includeHeaders": {
-          "label" : "Include Headers",
+          "label": "Include Headers",
           "required": false,
-          "viewClass" : "SelectView",
-          "description" : "Default Yes",
+          "viewClass": "SelectView",
+          "description": "Default Yes",
           "model": {
-            "Yes" : "Yes",
-            "No" : "No"
+            "Yes": "Yes",
+            "No": "No"
           },
           "prompt": "Include headers? Default Yes."
         },
@@ -83,24 +83,24 @@
       },
       "fields": {
         "includeHeaders": {
-          "label" : "Include Headers",
+          "label": "Include Headers",
           "required": true,
-          "viewClass" : "SelectView",
-          "description" : "Default Yes",
+          "viewClass": "SelectView",
+          "description": "Default Yes",
           "model": {
-            "Yes" : "Yes",
-            "No" : "No"
+            "Yes": "Yes",
+            "No": "No"
           },
           "prompt": "Include headers? Default Yes"
         },
         "separator": {
-          "label" : "Separators",
+          "label": "Separators",
           "required": true,
-          "viewClass" : "SelectView",
-          "description" : "Default Yes",
+          "viewClass": "SelectView",
+          "description": "Default Yes",
           "model": {
-            "comma" : "Comma (,)",
-            "semicolon" : "Semicolon (;)",
+            "comma": "Comma (,)",
+            "semicolon": "Semicolon (;)",
             "space": "Space ( )",
             "tab": "Tab (\\t)"
           },
@@ -124,24 +124,24 @@
       },
       "fields": {
         "includeHeaders": {
-          "label" : "Include Headers",
+          "label": "Include Headers",
           "required": true,
-          "viewClass" : "SelectView",
-          "description" : "Default Yes",
+          "viewClass": "SelectView",
+          "description": "Default Yes",
           "model": {
-            "Yes" : "Yes",
-            "No" : "No"
+            "Yes": "Yes",
+            "No": "No"
           },
           "prompt": "Include headers? Default Yes"
         },
         "separator": {
-          "label" : "Separators",
+          "label": "Separators",
           "required": true,
-          "viewClass" : "SelectView",
-          "description" : "Default Yes",
+          "viewClass": "SelectView",
+          "description": "Default Yes",
           "model": {
-            "comma" : "Comma (,)",
-            "semicolon" : "Semicolon (;)",
+            "comma": "Comma (,)",
+            "semicolon": "Semicolon (;)",
             "space": "Space ( )",
             "tab": "Tab (\\t)"
           },
