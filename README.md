@@ -108,8 +108,11 @@ This action will combine multiple incoming events into a CSV file until there is
 of more than 10 seconds between events. Afterwards, the CSV file will be closed
 and attached to the outgoing message.
 
-The columns of the CSV file will be mapped with same names as keys in the input JSON body.
-The requirement for an input JSON - it should be plain without nested complex objects. 
+This action will convert an incoming array into a CSV file by following approach:
+
+* Header inherits names of keys from the input message;
+* Payload will store data from Values of relevant Keys (Columns).
+
 The keys of an input JSON will be published as the header in the first row. For each incoming
 event, the value for each header will be `stringified` and written as the value
 for that cell. All other properties will be ignored. For example, headers
@@ -139,10 +142,16 @@ able to handle file attachments.
 * `Include Header` - this select configures output behavior of the component. If option is `Yes` or no value chosen than header of csv file will be written to attachment, this is default behavior. If value `No` selected than csv header will be omitted from attachment.
 * `Separator` - this select configures type of CSV delimiter in an output file. There are next options: `Comma (,)`, `Semicolon (;)`, `Space ( )`, `Tab (\t)`. 
 
-This action will convert an incoming array into a CSV file.
+This action will convert an incoming array into a CSV file by following approach:
 
-The columns of the CSV file will be mapped with same names as keys in the input JSON body.
-The requirement for an input Array - each JSON object inside should be plain without nested complex objects and similar to each other. 
+* Header inherits names of keys from the input message;
+* Payload will store data from Values of relevant Keys (Columns).
+
+Requirements:
+
+* The inbound message is an JSON Array of Object with identical structure;
+* Each JSON object has plain structure without nested levels. 
+
 The keys of an input JSON will be published as the header in the first row. For each incoming
 event, the value for each header will be `stringified` and written as the value
 for that cell. All other properties will be ignored. For example, headers
@@ -150,9 +159,9 @@ for that cell. All other properties will be ignored. For example, headers
 
 ```
 [
-{"foo":"myfoo", "bar":"mybar"},
-{"foo":"myfoo", "bar":[1,2]},
-{"bar":"mybar", "baz":"mybaz"}
+    {"foo":"myfoo", "bar":"mybar"}
+    {"foo":"myfoo", "bar":[1,2]}
+    {"bar":"mybar", "baz":"mybaz"}
 ]
 ```
 
@@ -161,7 +170,7 @@ will produce the following `.csv` file:
 ```
 foo,bar
 myfoo,mybar
-myfoo,"[1,2]"
+myfoo2,[1,2]"
 ,mybar
 ```
 

@@ -47,7 +47,7 @@
       "main": "./lib/actions/write.js",
       "title": "Write CSV attachment",
       "help": {
-        "description": "Multiple incoming events can be combined into one CSV file with the write CSV action. See <a href='https://github.com/elasticio/csv-component/'>link</a> for additional documentation.",
+        "description": "Multiple incoming events can be combined into one CSV file with the write CSV action.",
         "link": "/components/csv/index.html#write-csv-attachment"
       },
       "fields": {
@@ -78,7 +78,7 @@
       "main": "./lib/actions/writeFromJson.js",
       "title": "Write CSV attachment from JSON Object",
       "help": {
-        "description": "Multiple incoming events can be combined into one CSV file with the write CSV action. See <a href='https://github.com/elasticio/csv-component/'>link</a> for additional documentation.",
+        "description": "Multiple incoming events can be combined into one CSV file with the write CSV action.",
         "link": "/components/csv/index.html#write-csv-attachment-from-json"
       },
       "fields": {
@@ -119,7 +119,7 @@
       "main": "./lib/actions/writeFromArray.js",
       "title": "Write CSV attachment from JSON Array",
       "help": {
-        "description": "Incoming array can be converted into one CSV file with the write CSV action. See <a href='https://github.com/elasticio/csv-component/'>link</a> for additional documentation.",
+        "description": "Incoming array can be converted into one CSV file with the write CSV action.",
         "link": "/components/csv/index.html#write-csv-attachment-from-array"
       },
       "fields": {
