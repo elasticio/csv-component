@@ -1,6 +1,7 @@
 ## 2.1.0 (April 5, 2020)
 
 * Add "Write CSV attachment from JSON" action
+* Update sailor version to 2.6.5
 
 ## 2.0.2 (December 24, 2019)
 
