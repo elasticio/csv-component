@@ -53,13 +53,20 @@ describe('CSV Write From Array component', function () {
     const msg = {
       body: [
         {
-          ProductKey: 'text11',
-          CategoryGroup_1: 'text12',
+          name: 'Bob',
+          email: 'bob@email.domain',
+          age: 30,
+          key1: true,
+          'not an age': null,
+          'not an age at all': undefined,
         },
         {
-          ProductKey: 'text21',
-          CategoryGroup_1: 'text22',
-        }],
+          name: 'Joe',
+          email: 'joe@email.domain',
+          age: 11,
+          'not an age at all': 322,
+        },
+      ],
     };
 
     await write.process.call({
