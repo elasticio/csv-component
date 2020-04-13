@@ -99,7 +99,7 @@ The output of the CSV Write component will be a message with an attachment.  In
 order to access this attachment, the component following the CSV Write must be
 able to handle file attachments.
 
-### Write CSV attachment from JSON
+### Write CSV attachment from JSON Object
 
 * `Include Header` - this select configures output behavior of the component. If option is `Yes` or no value chosen than header of csv file will be written to attachment, this is default behavior. If value `No` selected than csv header will be omitted from attachment.
 * `Separator` - this select configures type of CSV delimiter in an output file. There are next options: `Comma (,)`, `Semicolon (;)`, `Space ( )`, `Tab (\t)`. 
@@ -112,6 +112,11 @@ This action will convert an incoming array into a CSV file by following approach
 
 * Header inherits names of keys from the input message;
 * Payload will store data from Values of relevant Keys (Columns).
+
+Requirements:
+
+* The inbound message is an JSON Object;
+* This JSON object has plain structure without nested levels. Otherwise, the error message will be thrown: `Inbound message should be a plain Object. At least one of entries is not a primitive type`.
 
 The keys of an input JSON will be published as the header in the first row. For each incoming
 event, the value for each header will be `stringified` and written as the value
@@ -137,7 +142,7 @@ The output of the CSV Write component will be a message with an attachment.  In
 order to access this attachment, the component following the CSV Write must be
 able to handle file attachments.
 
-### Write CSV attachment from Array
+### Write CSV attachment from JSON Array
 
 * `Include Header` - this select configures output behavior of the component. If option is `Yes` or no value chosen than header of csv file will be written to attachment, this is default behavior. If value `No` selected than csv header will be omitted from attachment.
 * `Separator` - this select configures type of CSV delimiter in an output file. There are next options: `Comma (,)`, `Semicolon (;)`, `Space ( )`, `Tab (\t)`. 
@@ -149,8 +154,8 @@ This action will convert an incoming array into a CSV file by following approach
 
 Requirements:
 
-* The inbound message is an JSON Array of Object with identical structure;
-* Each JSON object has plain structure without nested levels. 
+* The inbound message is an JSON Array of Objects with identical structure;
+* Each JSON object has plain structure without nested levels. Otherwise, the error message will be thrown: `Inbound message should be a plain Object. At least one of entries is not a primitive type`.
 
 The keys of an input JSON will be published as the header in the first row. For each incoming
 event, the value for each header will be `stringified` and written as the value
