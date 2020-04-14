@@ -111,12 +111,14 @@ and attached to the outgoing message.
 This action will convert an incoming array into a CSV file by following approach:
 
 * Header inherits names of keys from the input message;
-* Payload will store data from Values of relevant Keys (Columns).
+* Payload will store data from Values of relevant Keys (Columns);
+* Undefined values of a JSON Object won't be joined to result set (`{ key: undefined }`);
+* False values of a JSON Object will be represented as empty string (`{ key: false }` => `""`).
 
 Requirements:
 
 * The inbound message is an JSON Object;
-* This JSON object has plain structure without nested levels. Otherwise, the error message will be thrown: `Inbound message should be a plain Object. At least one of entries is not a primitive type`.
+* This JSON object has plain structure without nested levels (structured types `objects` and `arrays` are not supported as values). Only primitive types are supported: `strings`, `numbers`, `booleans` and `null`. Otherwise, the error message will be thrown: `Inbound message should be a plain Object. At least one of entries is not a primitive type`.
 
 The keys of an input JSON will be published as the header in the first row. For each incoming
 event, the value for each header will be `stringified` and written as the value
@@ -150,12 +152,14 @@ able to handle file attachments.
 This action will convert an incoming array into a CSV file by following approach:
 
 * Header inherits names of keys from the input message;
-* Payload will store data from Values of relevant Keys (Columns).
+* Payload will store data from Values of relevant Keys (Columns);
+* Undefined values of a JSON Object won't be joined to result set (`{ key: undefined }`);
+* False values of a JSON Object will be represented as empty string (`{ key: false }` => `""`).
 
 Requirements:
 
 * The inbound message is an JSON Array of Objects with identical structure;
-* Each JSON object has plain structure without nested levels. Otherwise, the error message will be thrown: `Inbound message should be a plain Object. At least one of entries is not a primitive type`.
+* Each JSON object has plain structure without nested levels (structured types `objects` and `arrays` are not supported as values). Only primitive types are supported: `strings`, `numbers`, `booleans` and `null`. Otherwise, the error message will be thrown: `Inbound message should be a plain Object. At least one of entries is not a primitive type`.
 
 The keys of an input JSON will be published as the header in the first row. For each incoming
 event, the value for each header will be `stringified` and written as the value
