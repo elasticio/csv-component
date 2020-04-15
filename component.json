@@ -143,7 +143,8 @@
             "comma": "Comma (,)",
             "semicolon": "Semicolon (;)",
             "space": "Space ( )",
-            "tab": "Tab (\\t)"
+            "tab": "Tab (\\t)",
+            "column": "Column (¦)"
           },
           "prompt": "Choose required CSV delimiter"
         }
