@@ -144,7 +144,7 @@
             "semicolon": "Semicolon (;)",
             "space": "Space ( )",
             "tab": "Tab (\\t)",
-            "column": "Column (¦)"
+            "column": "Column (\u00A6)"
           },
           "prompt": "Choose required CSV delimiter"
         }
