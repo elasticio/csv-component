@@ -1,4 +1,4 @@
-## 2.1.0 (April 5, 2020)
+## 2.1.0 (May 7, 2020)
 
 * Add "Write CSV attachment from Array" action
 * Add "Write CSV attachment from JSON" action

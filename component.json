@@ -7,6 +7,10 @@
     "read": {
       "main": "./lib/triggers/read.js",
       "title": "Read CSV file from URL",
+      "help": {
+        "description": "Fetch a CSV file from a given URL and store it in the attachment storage.",
+        "link": "/components/csv/index.html#read-csv-file-from-url"
+      },
       "type": "polling",
       "fields": {
         "url": {
@@ -29,6 +33,10 @@
     "read_action": {
       "main": "./lib/triggers/read.js",
       "title": "Read CSV attachment",
+      "help": {
+        "description": "Read a CSV attachment of an incoming message.",
+        "link": "/components/csv/index.html#read-csv-attachment"
+      },
       "fields": {
         "emitAll": {
           "label": "Emit all messages",
