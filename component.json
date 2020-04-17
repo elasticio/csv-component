@@ -2,11 +2,15 @@
   "title": "CSV",
   "description": "A comma-separated values (CSV) file stores tabular data (numbers and text) in plain-text form",
   "docsUrl": "https://github.com/elasticio/csv-component",
-  "buildType" : "docker",
+  "buildType": "docker",
   "triggers": {
     "read": {
       "main": "./lib/triggers/read.js",
       "title": "Read CSV file from URL",
+      "help": {
+        "description": "Fetch a CSV file from a given URL and store it in the attachment storage.",
+        "link": "/components/csv/index.html#read-csv-file-from-url"
+      },
       "type": "polling",
       "fields": {
         "url": {
@@ -25,10 +29,14 @@
       }
     }
   },
-  "actions" : {
+  "actions": {
     "read_action": {
       "main": "./lib/triggers/read.js",
       "title": "Read CSV attachment",
+      "help": {
+        "description": "Read a CSV attachment of an incoming message.",
+        "link": "/components/csv/index.html#read-csv-attachment"
+      },
       "fields": {
         "emitAll": {
           "label": "Emit all messages",
@@ -44,19 +52,21 @@
       }
     },
     "write_attachment": {
-      "description":
-      "Multiple incoming events can be combined into one CSV file with the write CSV action.  See https://github.com/elasticio/csv-component/ for additional documentation.",
       "main": "./lib/actions/write.js",
       "title": "Write CSV attachment",
+      "help": {
+        "description": "Multiple incoming events can be combined into one CSV file with the write CSV action.",
+        "link": "/components/csv/index.html#write-csv-attachment"
+      },
       "fields": {
         "includeHeaders": {
-          "label" : "Include Headers",
+          "label": "Include Headers",
           "required": false,
-          "viewClass" : "SelectView",
-          "description" : "Default Yes",
+          "viewClass": "SelectView",
+          "description": "Default Yes",
           "model": {
-            "Yes" : "Yes",
-            "No" : "No"
+            "Yes": "Yes",
+            "No": "No"
           },
           "prompt": "Include headers? Default Yes."
         },
@@ -66,8 +76,90 @@
       },
       "metadata": {
         "in": {
-            "type": "object",
-            "properties": {}
+          "type": "object",
+          "properties": {}
+        },
+        "out": {}
+      }
+    },
+    "write_attachment_from_json": {
+      "main": "./lib/actions/writeFromJson.js",
+      "title": "Write CSV attachment from JSON Object",
+      "help": {
+        "description": "Multiple incoming events can be combined into one CSV file with the write CSV action.",
+        "link": "/components/csv/index.html#write-csv-attachment-from-json"
+      },
+      "fields": {
+        "includeHeaders": {
+          "label": "Include Headers",
+          "required": true,
+          "viewClass": "SelectView",
+          "description": "Default Yes",
+          "model": {
+            "Yes": "Yes",
+            "No": "No"
+          },
+          "prompt": "Include headers? Default Yes"
+        },
+        "separator": {
+          "label": "Separators",
+          "required": true,
+          "viewClass": "SelectView",
+          "description": "Default Yes",
+          "model": {
+            "comma": "Comma (,)",
+            "semicolon": "Semicolon (;)",
+            "space": "Space ( )",
+            "tab": "Tab (\\t)"
+          },
+          "prompt": "Choose required CSV delimiter"
+        }
+      },
+      "metadata": {
+        "in": {
+          "type": "object",
+          "properties": {}
+        },
+        "out": {}
+      }
+    },
+    "write_attachment_from_array": {
+      "main": "./lib/actions/writeFromArray.js",
+      "title": "Write CSV attachment from JSON Array",
+      "help": {
+        "description": "Incoming array can be converted into one CSV file with the write CSV action.",
+        "link": "/components/csv/index.html#write-csv-attachment-from-array"
+      },
+      "fields": {
+        "includeHeaders": {
+          "label": "Include Headers",
+          "required": true,
+          "viewClass": "SelectView",
+          "description": "Default Yes",
+          "model": {
+            "Yes": "Yes",
+            "No": "No"
+          },
+          "prompt": "Include headers? Default Yes"
+        },
+        "separator": {
+          "label": "Separators",
+          "required": true,
+          "viewClass": "SelectView",
+          "description": "Default Yes",
+          "model": {
+            "comma": "Comma (,)",
+            "semicolon": "Semicolon (;)",
+            "space": "Space ( )",
+            "tab": "Tab (\\t)"
+          },
+          "prompt": "Choose required CSV delimiter"
+        }
+      },
+      "metadata": {
+        "in": {
+          "type": "array",
+          "properties": {}
         },
         "out": {}
       }

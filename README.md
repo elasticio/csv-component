@@ -60,7 +60,6 @@ a `JSON` object. To configure this action the following fields can be used:
 
 ![image](https://user-images.githubusercontent.com/40201204/60706373-fda1a380-9f11-11e9-8b5a-2acd2df33a87.png)
 
-
 ### Write CSV attachment
 
 * `Include Header` - this select configures output behavior of the component. If option is `Yes` or no value chosen than header of csv file will be written to attachment, this is default behavior. If value `No` selected than csv header will be omitted from attachment.
@@ -100,7 +99,97 @@ The output of the CSV Write component will be a message with an attachment.  In
 order to access this attachment, the component following the CSV Write must be
 able to handle file attachments.
 
+### Write CSV attachment from JSON Object
+
+* `Include Header` - this select configures output behavior of the component. If option is `Yes` or no value chosen than header of csv file will be written to attachment, this is default behavior. If value `No` selected than csv header will be omitted from attachment.
+* `Separator` - this select configures type of CSV delimiter in an output file. There are next options: `Comma (,)`, `Semicolon (;)`, `Space ( )`, `Tab (\t)`. 
+
+This action will combine multiple incoming events into a CSV file until there is a gap
+of more than 10 seconds between events. Afterwards, the CSV file will be closed
+and attached to the outgoing message.
+
+This action will convert an incoming array into a CSV file by following approach:
+
+* Header inherits names of keys from the input message;
+* Payload will store data from Values of relevant Keys (Columns);
+* Undefined values of a JSON Object won't be joined to result set (`{ key: undefined }`);
+* False values of a JSON Object will be represented as empty string (`{ key: false }` => `""`).
+
+Requirements:
+
+* The inbound message is an JSON Object;
+* This JSON object has plain structure without nested levels (structured types `objects` and `arrays` are not supported as values). Only primitive types are supported: `strings`, `numbers`, `booleans` and `null`. Otherwise, the error message will be thrown: `Inbound message should be a plain Object. At least one of entries is not a primitive type`.
+
+The keys of an input JSON will be published as the header in the first row. For each incoming
+event, the value for each header will be `stringified` and written as the value
+for that cell. All other properties will be ignored. For example, headers
+`foo,bar` along with the following JSON events:
+
+```
+{"foo":"myfoo", "bar":"mybar"}
+{"foo":"myfoo", "bar":[1,2]}
+{"bar":"mybar", "baz":"mybaz"}
+```
+
+will produce the following `.csv` file:
+
+```
+foo,bar
+myfoo,mybar
+myfoo,"[1,2]"
+,mybar
+```
+
+The output of the CSV Write component will be a message with an attachment.  In
+order to access this attachment, the component following the CSV Write must be
+able to handle file attachments.
+
+### Write CSV attachment from JSON Array
+
+* `Include Header` - this select configures output behavior of the component. If option is `Yes` or no value chosen than header of csv file will be written to attachment, this is default behavior. If value `No` selected than csv header will be omitted from attachment.
+* `Separator` - this select configures type of CSV delimiter in an output file. There are next options: `Comma (,)`, `Semicolon (;)`, `Space ( )`, `Tab (\t)`. 
+
+This action will convert an incoming array into a CSV file by following approach:
+
+* Header inherits names of keys from the input message;
+* Payload will store data from Values of relevant Keys (Columns);
+* Undefined values of a JSON Object won't be joined to result set (`{ key: undefined }`);
+* False values of a JSON Object will be represented as empty string (`{ key: false }` => `""`).
+
+Requirements:
+
+* The inbound message is an JSON Array of Objects with identical structure;
+* Each JSON object has plain structure without nested levels (structured types `objects` and `arrays` are not supported as values). Only primitive types are supported: `strings`, `numbers`, `booleans` and `null`. Otherwise, the error message will be thrown: `Inbound message should be a plain Object. At least one of entries is not a primitive type`.
+
+The keys of an input JSON will be published as the header in the first row. For each incoming
+event, the value for each header will be `stringified` and written as the value
+for that cell. All other properties will be ignored. For example, headers
+`foo,bar` along with the following JSON events:
+
+```
+[
+    {"foo":"myfoo", "bar":"mybar"}
+    {"foo":"myfoo", "bar":[1,2]}
+    {"bar":"mybar", "baz":"mybaz"}
+]
+```
+
+will produce the following `.csv` file:
+
+```
+foo,bar
+myfoo,mybar
+myfoo2,[1,2]"
+,mybar
+```
+
+The output of the CSV Write component will be a message with an attachment.  In
+order to access this attachment, the component following the CSV Write must be
+able to handle file attachments.
+
 ### Limitations
+
+#### General
 
 1. You may get `Component run out of memory and terminated.` error during run-time, that means that component needs more memory, please add
  `EIO_REQUIRED_RAM_MB` environment variable with an appropriate value (e.g. value `512` means that 512 MB will be allocated) for the component in this case.

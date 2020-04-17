@@ -1,3 +1,9 @@
+## 2.1.0 (May 7, 2020)
+
+* Add "Write CSV attachment from Array" action
+* Add "Write CSV attachment from JSON" action
+* Update sailor version to 2.6.5
+
 ## 2.0.2 (December 24, 2019)
 
 * Update sailor version to 2.5.4
