@@ -9,7 +9,7 @@
       "title": "Read CSV file from URL",
       "help": {
         "description": "Fetch a CSV file from a given URL and store it in the attachment storage.",
-        "link": "/components/csv/index.html#read-csv-file-from-url"
+        "link": "/components/csv/triggers#read-csv-file-from-url"
       },
       "type": "polling",
       "fields": {
@@ -35,7 +35,7 @@
       "title": "Read CSV attachment",
       "help": {
         "description": "Read a CSV attachment of an incoming message.",
-        "link": "/components/csv/index.html#read-csv-attachment"
+        "link": "/components/csv/actions#read-csv-attachment"
       },
       "fields": {
         "emitAll": {
@@ -56,7 +56,7 @@
       "title": "Write CSV attachment",
       "help": {
         "description": "Multiple incoming events can be combined into one CSV file with the write CSV action.",
-        "link": "/components/csv/index.html#write-csv-attachment"
+        "link": "/components/csv/actions#write-csv-attachment"
       },
       "fields": {
         "includeHeaders": {
@@ -87,12 +87,12 @@
       "title": "Write CSV attachment from JSON Object",
       "help": {
         "description": "Multiple incoming events can be combined into one CSV file with the write CSV action.",
-        "link": "/components/csv/index.html#write-csv-attachment-from-json"
+        "link": "/components/csv/actions#write-csv-attachment-from-json-object"
       },
       "fields": {
         "includeHeaders": {
           "label": "Include Headers",
-          "required": true,
+          "required": false,
           "viewClass": "SelectView",
           "description": "Default Yes",
           "model": {
@@ -105,7 +105,6 @@
           "label": "Separators",
           "required": true,
           "viewClass": "SelectView",
-          "description": "Default Yes",
           "model": {
             "comma": "Comma (,)",
             "semicolon": "Semicolon (;)",
@@ -128,12 +127,12 @@
       "title": "Write CSV attachment from JSON Array",
       "help": {
         "description": "Incoming array can be converted into one CSV file with the write CSV action.",
-        "link": "/components/csv/index.html#write-csv-attachment-from-array"
+        "link": "/components/csv/actions#write-csv-attachment-from-json-array"
       },
       "fields": {
         "includeHeaders": {
           "label": "Include Headers",
-          "required": true,
+          "required": false,
           "viewClass": "SelectView",
           "description": "Default Yes",
           "model": {
@@ -146,7 +145,6 @@
           "label": "Separators",
           "required": true,
           "viewClass": "SelectView",
-          "description": "Default Yes",
           "model": {
             "comma": "Comma (,)",
             "semicolon": "Semicolon (;)",
