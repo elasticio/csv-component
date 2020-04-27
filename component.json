@@ -147,6 +147,13 @@
             "column": "Column (\u00A6)"
           },
           "prompt": "Choose required CSV delimiter"
+        },
+        "path": {
+          "label": "Path to array",
+          "required": false,
+          "viewClass": "TextFieldView",
+          "description": "Default root array",
+          "prompt": "Specify path to array"
         }
       },
       "metadata": {
