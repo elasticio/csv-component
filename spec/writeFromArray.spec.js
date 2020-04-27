@@ -20,7 +20,7 @@ if (fs.existsSync('.env')) {
 const write = require('../lib/actions/writeFromArray.js');
 
 describe('CSV Write From Array component', function () {
-  this.timeout(15000);
+  this.timeout(35000);
 
   let emit;
   let cfg;
