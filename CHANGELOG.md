@@ -1,3 +1,7 @@
+## 2.1.1 (April 30, 2020)
+
+* Add the steward URL to the body of the outgoing message
+
 ## 2.1.0 (May 7, 2020)
 
 * Add "Write CSV attachment from Array" action
