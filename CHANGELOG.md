@@ -1,9 +1,12 @@
 ## 2.1.1 (May 7, 2020)
 
-* Add "Write CSV attachment from Array" action
-* Add "Write CSV attachment from JSON" action
 * Add input metadata for objects processing
 * Add the steward URL to the body of the outgoing message
+
+## 2.1.0 (April 22, 2020)
+
+* Add "Write CSV attachment from Array" action
+* Add "Write CSV attachment from JSON" action
 * Update sailor version to 2.6.5
 * Help links added
 
