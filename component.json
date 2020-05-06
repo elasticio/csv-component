@@ -117,7 +117,12 @@
       "metadata": {
         "in": {
           "type": "object",
-          "properties": {}
+          "properties": {
+            "inputObject": {
+              "type": "object",
+              "properties": {}
+            }
+          }
         },
         "out": {}
       }
@@ -156,8 +161,13 @@
       },
       "metadata": {
         "in": {
-          "type": "array",
-          "properties": {}
+          "type": "object",
+          "properties": {
+            "inputArray": {
+              "type": "array",
+              "items": {}
+            }
+          }
         },
         "out": {}
       }

@@ -52,8 +52,10 @@ describe('CSV Write From JSON component', function () {
 
     const msg1 = {
       body: {
-        ProductKey: 'text11',
-        CategoryGroup_1: 'text12',
+        inputObject: {
+          ProductKey: 'text11',
+          CategoryGroup_1: 'text12',
+        },
       },
     };
 
@@ -64,8 +66,10 @@ describe('CSV Write From JSON component', function () {
 
     const msg2 = {
       body: {
-        ProductKey: 'text21',
-        CategoryGroup_1: 'text22',
+        inputObject: {
+          ProductKey: 'text21',
+          CategoryGroup_1: 'text22',
+        },
       },
     };
 
