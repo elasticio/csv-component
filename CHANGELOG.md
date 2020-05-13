@@ -1,3 +1,7 @@
+## 2.1.2 (May 13, 2020)
+
+* Update sailor version to 2.6.7
+
 ## 2.1.1 (May 7, 2020)
 
 * Add input metadata for objects processing
