@@ -19,6 +19,7 @@ if (fs.existsSync('.env')) {
 
 const write = require('../lib/actions/writeFromArray.js');
 
+// eslint-disable-next-line func-names
 describe('CSV Write From Array component', function () {
   this.timeout(15000);
 
