@@ -1,4 +1,4 @@
-## 2.1.2 (May 13, 2020)
+## 2.1.2 (May 22, 2020)
 
 * Update sailor version to 2.6.7
 
