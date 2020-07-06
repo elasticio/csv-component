@@ -1,3 +1,7 @@
+## 2.1.3 (June 5, 2020)
+
+* Fix `timeout is not a function` bug
+
 ## 2.1.2 (May 22, 2020)
 
 * Update sailor version to 2.6.7
