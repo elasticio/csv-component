@@ -1,3 +1,7 @@
+## 2.1.4 (August 21, 2020)
+
+Minor asynchronicity improvement.
+
 ## 2.1.3 (June 5, 2020)
 
 * Fix `timeout is not a function` bug
