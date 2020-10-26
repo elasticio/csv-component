@@ -1,3 +1,7 @@
+## 2.1.5 (October 30, 2020)
+
+Upgrade to sailor 2.6.18
+
 ## 2.1.4 (August 21, 2020)
 
 Minor asynchronicity improvement.

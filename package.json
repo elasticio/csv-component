@@ -1,6 +1,6 @@
 {
   "name": "csv-component",
-  "version": "2.1.4",
+  "version": "2.1.5",
   "description": "CSV Component for elastic.io platform",
   "main": "index.js",
   "scripts": {
@@ -33,7 +33,7 @@
     "csv-parser": "2.2.0",
     "elasticio-node": "0.0.9",
     "elasticio-rest-node": "1.2.3",
-    "elasticio-sailor-nodejs": "2.6.7",
+    "elasticio-sailor-nodejs": "2.6.18-dev",
     "lodash": "4.17.13",
     "moment": "2.24.0",
     "node-uuid": "1.4.3",
