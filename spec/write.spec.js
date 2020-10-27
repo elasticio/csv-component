@@ -37,11 +37,13 @@ describe('CSV Write component', function () {
     };
 
     nock('https://api.elastic.io', { encodedQueryParams: true })
+      .persist()
       .post('/v2/resources/storage/signed-url')
       .reply(200,
         { put_url: 'https://examlple.mock/putUrl', get_url: 'https://examlple.mock/getUrl' });
 
     nock('https://examlple.mock')
+      .persist()
       .put('/putUrl')
       .reply(200, {});
   });
