@@ -1,5 +1,6 @@
 ## 2.1.6 (December 4, 2020)
 * Fix bug with Write From Array and multiple messages
+* Bump node version to 14
 
 ## 2.1.5 (October 30, 2020)
 

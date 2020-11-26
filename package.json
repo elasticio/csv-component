@@ -9,7 +9,7 @@
     "integration-test": "mocha spec-integration"
   },
   "engines": {
-    "node": ">=12.13.0"
+    "node": "14"
   },
   "repository": {
     "type": "git",
