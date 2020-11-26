@@ -26,7 +26,10 @@ describe('CSV Write From Array component', function () {
   let emit;
   let cfg;
 
-  before(async () => {
+  beforeEach(() => {
+    emit = sinon.spy();
+    nock.cleanAll();
+
     cfg = {
       includeHeaders: 'Yes',
       separator: 'semicolon',
@@ -39,24 +42,16 @@ describe('CSV Write From Array component', function () {
 
     nock('https://examlple.mock')
       .put('/putUrl', 'name;email;age;key1;not an age;not an age at all\n'
-          + 'Bob;bob@email.domain;30;1;;\n'
-          + 'Joe;joe@email.domain;11;;;322')
+            + 'Bob;bob@email.domain;30;1;;\n'
+            + 'Joe;joe@email.domain;11;;;322')
       .reply(200, {});
   });
 
-  beforeEach(() => {
-    emit = sinon.spy();
-  });
-
   afterEach(() => {
-    expect(nock.isDone()).to.be.true;
+    expect(nock.isDone()).to.be.equal(true);
   });
 
   it('should write csv rows', async () => {
-    await write.init.call({
-      logger,
-    }, cfg);
-
     const msg = {
       body: {
         inputArray: [
@@ -95,12 +90,8 @@ describe('CSV Write From Array component', function () {
     nock('https://examlple.mock')
       .put('/putUrl2', 'foo;fooz\n'
             + 'bar1;barz1\n'
-            + 'bar1;barz1')
+            + 'bar2;barz2')
       .reply(200, {});
-
-    await write.init.call({
-      logger,
-    }, cfg);
 
     const msg1 = {
       body: {
