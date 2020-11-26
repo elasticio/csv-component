@@ -159,7 +159,7 @@ This action will convert an incoming array into a CSV file by following approach
 Requirements:
 
 * The inbound message is an JSON Array of Objects with identical structure, wrapped by 'inputArray' object;
-* Each JSON object has plain structure without nested levels (structured types `objects` and `arrays` are not supported as values). Only primitive types are supported: `strings`, `numbers`, `booleans` and `null`. Otherwise, the error message will be thrown: `Inbound message should be a plain Object. At least one of entries is not a primitive type`.
+* Each JSON object for a message has plain structure without nested levels (structured types `objects` and `arrays` are not supported as values). Only primitive types are supported: `strings`, `numbers`, `booleans` and `null`. Otherwise, the error message will be thrown: `Inbound message should be a plain Object. At least one of entries is not a primitive type`.
 
 The keys of an input JSON will be published as the header in the first row. For each incoming
 event, the value for each header will be `stringified` and written as the value
@@ -185,7 +185,7 @@ myfoo2,[1,2]"
 ,mybar
 ```
 
-The output of the CSV Write component will be a message with an attachment.  In
+The output of the CSV Write component will be a message with an attachment. There will be one CSV file generated per incoming message.  In
 order to access this attachment, the component following the CSV Write must be
 able to handle file attachments.
 

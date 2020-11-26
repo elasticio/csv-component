@@ -1,3 +1,6 @@
+## 2.1.6 (December 4, 2020)
+* Fix bug with Write From Array and multiple messages
+
 ## 2.1.5 (October 30, 2020)
 
 Upgrade to sailor 2.6.18
