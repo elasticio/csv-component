@@ -34,7 +34,6 @@ describe('CSV Read component', () => {
     expect(date.getUTCSeconds()).to.equal(seconds);
   }
 
-
   it('should handle empty body', (done) => {
     runTest(csv.process, {}, {}, (runner) => {
       expect(runner.data.length).to.equal(0);
@@ -43,7 +42,6 @@ describe('CSV Read component', () => {
       done();
     });
   });
-
 
   it('should parse simple string rows', (done) => {
     const cfg = {
@@ -120,7 +118,6 @@ describe('CSV Read component', () => {
       done();
     });
   });
-
 
   it('should parse simple number rows', (done) => {
     const msg = {};

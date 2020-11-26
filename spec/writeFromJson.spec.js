@@ -80,7 +80,7 @@ describe('CSV Write From JSON component', function () {
 
     expect(emit.getCalls().length).to.equal(2);
 
-    await new Promise(resolve => setTimeout(resolve, 12000));
+    await new Promise((resolve) => setTimeout(resolve, 12000));
     expect(emit.getCalls().length).to.equal(3);
   });
 });
