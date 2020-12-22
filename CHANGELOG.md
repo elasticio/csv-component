@@ -1,3 +1,8 @@
+## 2.1.6 (January 4, 2021)
+* Fix bug with Write From Array and multiple messages
+* Bump node version to 14
+* Bump dependencies
+
 ## 2.1.5 (October 30, 2020)
 
 Upgrade to sailor 2.6.18

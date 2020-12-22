@@ -77,11 +77,11 @@ describe('CSV Write Timeout', function () {
           logger,
         }, msg1, cfg);
         // eslint-disable-next-line no-await-in-loop
-        await new Promise(resolve => setTimeout(resolve, 1000));
+        await new Promise((resolve) => setTimeout(resolve, 1000));
       }
-      await new Promise(resolve => setTimeout(resolve, 12000));
+      await new Promise((resolve) => setTimeout(resolve, 12000));
       expect(emit.getCalls().length).to.equal(4);
-      expect(emit.getCalls().filter(call => call.args[0] === 'data').length).to.equal(1);
+      expect(emit.getCalls().filter((call) => call.args[0] === 'data').length).to.equal(1);
       for (let i = 0; i < 3; i += 1) {
       // eslint-disable-next-line no-await-in-loop
         await write.process.call({
@@ -89,12 +89,12 @@ describe('CSV Write Timeout', function () {
           logger,
         }, msg1, cfg);
         // eslint-disable-next-line no-await-in-loop
-        await new Promise(resolve => setTimeout(resolve, 1000));
+        await new Promise((resolve) => setTimeout(resolve, 1000));
       }
 
-      await new Promise(resolve => setTimeout(resolve, 12000));
+      await new Promise((resolve) => setTimeout(resolve, 12000));
       expect(emit.getCalls().length).to.equal(8);
-      expect(emit.getCalls().filter(call => call.args[0] === 'data').length).to.equal(2);
+      expect(emit.getCalls().filter((call) => call.args[0] === 'data').length).to.equal(2);
     });
   });
 
@@ -127,11 +127,11 @@ describe('CSV Write Timeout', function () {
           logger,
         }, msg1, cfg);
         // eslint-disable-next-line no-await-in-loop
-        await new Promise(resolve => setTimeout(resolve, 1000));
+        await new Promise((resolve) => setTimeout(resolve, 1000));
       }
-      await new Promise(resolve => setTimeout(resolve, 12000));
+      await new Promise((resolve) => setTimeout(resolve, 12000));
       expect(emit.getCalls().length).to.equal(4);
-      expect(emit.getCalls().filter(call => call.args[0] === 'data').length).to.equal(1);
+      expect(emit.getCalls().filter((call) => call.args[0] === 'data').length).to.equal(1);
       for (let i = 0; i < 3; i += 1) {
       // eslint-disable-next-line no-await-in-loop
         await writeFromJson.process.call({
@@ -139,12 +139,12 @@ describe('CSV Write Timeout', function () {
           logger,
         }, msg1, cfg);
         // eslint-disable-next-line no-await-in-loop
-        await new Promise(resolve => setTimeout(resolve, 1000));
+        await new Promise((resolve) => setTimeout(resolve, 1000));
       }
 
-      await new Promise(resolve => setTimeout(resolve, 12000));
+      await new Promise((resolve) => setTimeout(resolve, 12000));
       expect(emit.getCalls().length).to.equal(8);
-      expect(emit.getCalls().filter(call => call.args[0] === 'data').length).to.equal(2);
+      expect(emit.getCalls().filter((call) => call.args[0] === 'data').length).to.equal(2);
     });
   });
 });

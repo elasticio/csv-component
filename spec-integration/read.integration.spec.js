@@ -9,7 +9,6 @@ describe('CSV Read component integration tests', () => {
     .get('/winter12.csv')
     .replyWithFile(200, `${__dirname}/../test/winter12.csv`);
 
-
   it('winter12.csv', (done) => {
     const msg = {};
 
