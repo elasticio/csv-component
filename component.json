@@ -109,7 +109,8 @@
             "comma": "Comma (,)",
             "semicolon": "Semicolon (;)",
             "space": "Space ( )",
-            "tab": "Tab (\\t)"
+            "tab": "Tab (\\t)",
+            "pipe": "Pipe (\u00A6)"
           },
           "prompt": "Choose required CSV delimiter"
         }
@@ -154,7 +155,8 @@
             "comma": "Comma (,)",
             "semicolon": "Semicolon (;)",
             "space": "Space ( )",
-            "tab": "Tab (\\t)"
+            "tab": "Tab (\\t)",
+            "pipe": "Pipe (\u00A6)"
           },
           "prompt": "Choose required CSV delimiter"
         }

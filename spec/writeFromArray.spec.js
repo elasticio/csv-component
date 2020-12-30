@@ -39,12 +39,6 @@ describe('CSV Write From Array component', function () {
       .post('/v2/resources/storage/signed-url')
       .reply(200,
         { put_url: 'https://examlple.mock/putUrl', get_url: 'https://examlple.mock/getUrl' });
-
-    nock('https://examlple.mock')
-      .put('/putUrl', 'name;email;age;key1;not an age;not an age at all\n'
-            + 'Bob;bob@email.domain;30;1;;\n'
-            + 'Joe;joe@email.domain;11;;;322')
-      .reply(200, {});
   });
 
   afterEach(() => {
@@ -52,6 +46,49 @@ describe('CSV Write From Array component', function () {
   });
 
   it('should write csv rows', async () => {
+    nock('https://examlple.mock')
+      .put('/putUrl', 'name;email;age;key1;not an age;not an age at all\n'
+            + 'Bob;bob@email.domain;30;1;;\n'
+            + 'Joe;joe@email.domain;11;;;322')
+      .reply(200, {});
+
+    const msg = {
+      body: {
+        inputArray: [
+          {
+            name: 'Bob',
+            email: 'bob@email.domain',
+            age: 30,
+            key1: true,
+            'not an age': null,
+            'not an age at all': undefined,
+          },
+          {
+            name: 'Joe',
+            email: 'joe@email.domain',
+            age: 11,
+            'not an age at all': 322,
+          },
+        ],
+      },
+    };
+
+    await write.process.call({
+      emit,
+      logger,
+    }, msg, cfg);
+
+    expect(emit.getCalls().length).to.equal(2);
+  });
+
+  it('use different separator', async () => {
+    nock('https://examlple.mock')
+      .put('/putUrl', 'name¦email¦age¦key1¦not an age¦not an age at all\n'
+            + 'Bob¦bob@email.domain¦30¦1¦¦\n'
+            + 'Joe¦joe@email.domain¦11¦¦¦322')
+      .reply(200, {});
+
+    cfg.separator = 'pipe';
     const msg = {
       body: {
         inputArray: [
@@ -82,6 +119,12 @@ describe('CSV Write From Array component', function () {
   });
 
   it('should handle two messages rows', async () => {
+    nock('https://examlple.mock')
+      .put('/putUrl', 'name;email;age;key1;not an age;not an age at all\n'
+            + 'Bob;bob@email.domain;30;1;;\n'
+            + 'Joe;joe@email.domain;11;;;322')
+      .reply(200, {});
+
     nock('https://api.elastic.io', { encodedQueryParams: true })
       .post('/v2/resources/storage/signed-url')
       .reply(200,
