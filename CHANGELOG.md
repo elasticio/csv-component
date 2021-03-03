@@ -1,4 +1,9 @@
+## 2.1.7 (March 7, 2021)
+
+* Add 'Read File' from url action option
+
 ## 2.1.6 (January 4, 2021)
+
 * Fix bug with Write From Array and multiple messages
 * Bump node version to 14
 * Bump dependencies

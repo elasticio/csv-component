@@ -38,6 +38,13 @@
         "link": "/components/csv/actions#read-csv-attachment"
       },
       "fields": {
+        "url": {
+          "label": "CSV URL",
+          "required": true,
+          "placeholder": "http://my-url.com/foo.csv",
+          "note": "We will fetch this URL and parse it as CSV file",
+          "viewClass": "TextFieldWithNoteView"
+        },
         "emitAll": {
           "label": "Emit all messages",
           "viewClass": "CheckBoxView"
