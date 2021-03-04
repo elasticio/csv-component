@@ -36,8 +36,6 @@ This trigger will fetch the CSV file from a given URL. The address must be acces
 to the component. The fetched CSV file will be placed in the attachment part of the
 outgoing message.
 
-![image](https://user-images.githubusercontent.com/40201204/60707311-190dae00-9f14-11e9-81a8-d48d9dcd1d03.png)
-
 *   `CSV URL` - the full URL to the file for retrieving data.
 *   `Emit all messages` - this checkbox configures output behavior of the component. If the option is checked - the component emits an array of messages, otherwise - the component emits a message per row.
 *   `CSV Header` - this is a required field. Input the names of headers separated with a comma.
@@ -59,8 +57,6 @@ To configure this action the following fields can be used:
 *   `Separators` - Specify the separator type. Usually it is a comma (`,`) but values like Semicolon (`;`), Space (` `), Tab (`\t`) and Hash (`#`) are also supported.
 *   `Skip rows` - if you know that the incoming CSV file has certain number of headers you can indicate to skip them. The supported values are `None`, `First row`, `First two`, `First three` and `First four`.
 *   `Data columns` - here the values will be added dynamically based on the values in the `CSV Header` field. Here each data column will be listed with the name, Data Type and the Format to enable further configuration.
-
-![image](https://user-images.githubusercontent.com/40201204/60706373-fda1a380-9f11-11e9-8b5a-2acd2df33a87.png)
 
 ### Write CSV attachment
 
@@ -94,8 +90,6 @@ myfoo,"[1,2]"
 When columns are added in the UI, you will be presented with an opportunity to
 provide a JSONata expression per column. If you require number formatting that
 is specific to a locale, the JSONata expression should handle that concern.
-
-![screenshot from 2017-10-17 09-28-04](https://user-images.githubusercontent.com/5710732/31651871-926b4530-b31d-11e7-936f-bcf3ff05f8e2.png)
 
 The output of the CSV Write component will be a message with an attachment.  In
 order to access this attachment, the component following the CSV Write must be
