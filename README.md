@@ -15,13 +15,13 @@ attachment. It can also write a CSV file from the incoming events.
 ## Environment variables
 Name|Mandatory|Description|Values|
 |----|---------|-----------|------|
-|EIO_REQUIRED_RAM_MB| false | Value of allocated memory to component | Recommended: 512 |
-|REQUEST_TIMEOUT| false |  HTTP request timeout in milliseconds | Default value: 10000 |
-|REQUEST_RETRY_DELAY| false | Delay between retry attempts in milliseconds | Default value: 7000 |
-|REQUEST_MAX_RETRY| false | Number of HTTP request retry attempts |  Default value: 7 |
-|REQUEST_MAX_CONTENT_LENGTH| false | Max size of http request in bytes | Default value: 10485760 |
-|TIMEOUT_BETWEEN_EVENTS| false | Number of milliseconds write action wait before creating separate attachments | Default value: 10000 |
-|LOG_LEVEL| false | Level of logger verbosity | trace, debug, info, warning, error Default: info |
+|EIO_REQUIRED_RAM_MB| false | Value of allocated memory to component | Recommended: `512`/`1024` |
+|REQUEST_TIMEOUT| false |  HTTP request timeout in milliseconds | Default value: `10000` |
+|REQUEST_RETRY_DELAY| false | Delay between retry attempts in milliseconds | Default value: `7000` |
+|REQUEST_MAX_RETRY| false | Number of HTTP request retry attempts |  Default value: `7` |
+|REQUEST_MAX_CONTENT_LENGTH| false | Max size of http request in bytes | Default value: `10485760` |
+|TIMEOUT_BETWEEN_EVENTS| false | Number of milliseconds write action wait before creating separate attachments | Default value: `10000` |
+
 
 ## Credentials
 
@@ -49,9 +49,11 @@ outgoing message.
 
 ### Read CSV attachment
 
-This action will read the CSV attachment of the incoming message and output
-a `JSON` object. To configure this action the following fields can be used:
+This action will read the CSV attachment of the incoming message or from the specified URL and output a JSON object.
+To configure this action the following fields can be used:
 
+
+*   `CSV URL` - the full URL to the file for retrieving data. Leave the field blank and action will read CSV attachment of the incoming message (if any). Error will be thrown if URL of the CSV is missing and no CSV file in incoming message found
 *   `Emit all messages` - this checkbox configures output behavior of the component. If the option is checked - the component emits an array of messages, otherwise - the component emits a message per row.
 *   `CSV Header` - this is a required field. Input the names of headers separated with a comma.
 *   `Separators` - Specify the separator type. Usually it is a comma (`,`) but values like Semicolon (`;`), Space (` `), Tab (`\t`) and Hash (`#`) are also supported.
@@ -194,7 +196,7 @@ able to handle file attachments.
 #### General
 
 1. You may get `Component run out of memory and terminated.` error during run-time, that means that component needs more memory, please add
- `EIO_REQUIRED_RAM_MB` environment variable with an appropriate value (e.g. value `512` means that 512 MB will be allocated) for the component in this case.
+ `EIO_REQUIRED_RAM_MB` environment variable with an appropriate value (e.g. value `1024` means that 1024 MB will be allocated) for the component in this case.
 2. You may get `Error: write after end` error, as a current workaround try increase value of environment variable: `TIMEOUT_BETWEEN_EVENTS`. 
 3. Maximal possible size for an attachment is 10 MB.
-4. Attachments mechanism does not work with [Local Agent Installation](https://support.elastic.io/support/solutions/articles/14000076461-announcing-the-local-agent-)
+4. Attachments mechanism does not work with [Local Agent Installation](https://docs.elastic.io/getting-started/local-agent.html)
