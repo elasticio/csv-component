@@ -1,4 +1,4 @@
-## 2.1.7 (March 7, 2021)
+## 2.1.7 (March 12, 2021)
 
 * Add support for reading a file from a remote URL in an action
 * Update Sailor version to 2.6.24
