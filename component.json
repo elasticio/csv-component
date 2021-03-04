@@ -40,9 +40,9 @@
       "fields": {
         "url": {
           "label": "CSV URL",
-          "required": true,
+          "required": false,
           "placeholder": "http://my-url.com/foo.csv",
-          "note": "We will fetch this URL and parse it as CSV file",
+          "note": "We will fetch this URL and parse it as CSV file, leave the field blank if you expect CSV attachment from previous step",
           "viewClass": "TextFieldWithNoteView"
         },
         "emitAll": {

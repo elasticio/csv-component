@@ -1,6 +1,6 @@
-## 2.1.7 (March 7, 2021)
+## 2.1.7 (March 12, 2021)
 
-* Add support for reading a file from a remote URL in an action
+* Add support for reading a file from a remote URL in Read CSV attachment action
 * Update Sailor version to 2.6.24
 
 ## 2.1.6 (January 4, 2021)
