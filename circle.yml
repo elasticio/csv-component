@@ -19,7 +19,7 @@ jobs:
           command: npm test
       - run:
           name: Audit Dependencies
-          command: npm audit --audit-level=high
+          command: npm audit --audit-level=critical
 workflows:
   version: 2
   build_and_test:
