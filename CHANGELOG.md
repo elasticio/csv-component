@@ -1,8 +1,14 @@
 ## 2.2.0 (April 23, 2021)
 * Add pipe to list of separators in `Write CSV attachment from JSON Array` and `Write CSV attachment from JSON Object` actions 
-* Bump dependencies (including Sailor to version 2.6.24)
+* Bump dependencies
+
+## 2.1.7 (March 12, 2021)
+
+* Add support for reading a file from a remote URL in Read CSV attachment action
+* Update Sailor version to 2.6.24
 
 ## 2.1.6 (January 4, 2021)
+
 * Fix bug with Write From Array and multiple messages
 * Bump node version to 14
 * Bump dependencies
