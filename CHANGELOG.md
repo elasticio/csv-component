@@ -1,3 +1,7 @@
+## 2.2.0 (April 23, 2021)
+* Add pipe to list of separators in `Write CSV attachment from JSON Array` and `Write CSV attachment from JSON Object` actions 
+* Bump dependencies
+
 ## 2.1.7 (March 12, 2021)
 
 * Add support for reading a file from a remote URL in Read CSV attachment action
