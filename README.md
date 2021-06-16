@@ -43,6 +43,17 @@ outgoing message.
 *   `Skip rows` - if you know that the incoming CSV file has certain number of headers you can indicate to skip them. The supported values are `None`, `First row`, `First two`, `First three` and `First four`.
 *   `Data columns` - here the values will be added dynamically based on the values in the `CSV Header` field. Here each data column will be listed with the name, Data Type and the Format to enable further configuration.
 
+### Read CSV file from URL v2
+
+This trigger will fetch the CSV file from a given URL. The address must be accessible
+to the component. The fetched CSV file will be output as JSON object
+
+*   `CSV URL` - the full URL to the file for retrieving data.
+*   `Emit Behavior` - this selector configures output behavior of the component. If the option is `Fetch All` - the component emits an array of messages, otherwise (`Emit Individually`) - the component emits a message per row.
+*   `Delimiter` - The delimiting character. Leave blank to auto-detect from a list of most common delimiters.
+*   `First row contains headers` - if checked, the first row of parsed data will be interpreted as field names.
+*   `Convert Data fields to their type` - numeric, date and boolean data will be converted to their type instead of remaining strings.
+
 ## Actions
 
 ### Read CSV attachment
@@ -57,6 +68,17 @@ To configure this action the following fields can be used:
 *   `Separators` - Specify the separator type. Usually it is a comma (`,`) but values like Semicolon (`;`), Space (` `), Tab (`\t`) and Hash (`#`) are also supported.
 *   `Skip rows` - if you know that the incoming CSV file has certain number of headers you can indicate to skip them. The supported values are `None`, `First row`, `First two`, `First three` and `First four`.
 *   `Data columns` - here the values will be added dynamically based on the values in the `CSV Header` field. Here each data column will be listed with the name, Data Type and the Format to enable further configuration.
+
+### Read CSV attachment v2
+
+This action will read the CSV attachment of the incoming message or from the specified URL and output a JSON object.
+To configure this action the following fields can be used:
+
+*   `CSV URL` - the full URL to the file for retrieving data.
+*   `Emit Behavior` - this selector configures output behavior of the component. If the option is `Fetch All` - the component emits an array of messages, otherwise (`Emit Individually`) - the component emits a message per row.
+*   `Delimiter` - The delimiting character. Leave blank to auto-detect from a list of most common delimiters.
+*   `First row contains headers` - if checked, the first row of parsed data will be interpreted as field names.
+*   `Convert Data fields to their type` - numeric, date and boolean data will be converted to their type instead of remaining strings.
 
 ### Write CSV attachment
 
