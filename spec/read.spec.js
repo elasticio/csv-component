@@ -1,245 +1,110 @@
-/* eslint-disable no-unused-expressions */
+process.env.REQUEST_MAX_RETRY = 0;
+const { Logger } = require('@elastic.io/component-commons-library');
 const { expect } = require('chai');
 const nock = require('nock');
+const sinon = require('sinon');
+const readCSV = require('../lib/actions/read.js');
 
-const csv = require('../lib/triggers/read.js');
-const { runTest } = require('./testrunner.js');
+const logger = Logger.getLogger();
 
-describe('CSV Read component', () => {
-  nock('http://test.env.mock')
-    .get('/simple.csv')
-    .replyWithFile(200, `${__dirname}/../test/simple.csv`);
-
-  nock('http://test.env.mock')
-    .get('/dates.csv')
-    .replyWithFile(200, `${__dirname}/../test/dates.csv`);
-
-  nock('http://test.env.mock')
-    .get('/numbers.csv')
-    .replyWithFile(200, `${__dirname}/../test/numbers.csv`);
+describe('CSV Read component', async () => {
+  let cfg;
+  const msg = {};
+  const context = {
+    logger,
+  };
 
   nock('http://test.env.mock')
-    .get('/numbers_us.csv')
-    .replyWithFile(200, `${__dirname}/../test/numbers_us.csv`);
+    .get('/formats.csv')
+    .times(10)
+    .replyWithFile(200, `${__dirname}/../test/formats.csv`);
 
-  nock('http://test.env.mock')
-    .get('/numbers_de.csv')
-    .replyWithFile(200, `${__dirname}/../test/numbers_de.csv`);
+  it('One file', async () => {
+    msg.body = {
+      url: 'http://test.env.mock/formats.csv',
+      header: true,
+      dynamicTyping: true,
+      delimiter: '',
+    };
+    cfg = {
+      emitAll: true,
+    };
+    context.emit = sinon.spy();
+    await readCSV.process.call(context, msg, cfg);
 
-  function expectDate(date, year, month, day, minutes, seconds) {
-    expect(date.getUTCFullYear()).to.equal(year);
-    expect(date.getUTCMonth()).to.equal(month);
-    expect(date.getUTCDate()).to.equal(day);
-    expect(date.getUTCMinutes()).to.equal(minutes);
-    expect(date.getUTCSeconds()).to.equal(seconds);
-  }
+    expect(context.emit.callCount)
+      .to.equal(1); // one emit call
 
-  it('should handle empty body', (done) => {
-    runTest(csv.process, {}, {}, (runner) => {
-      expect(runner.data.length).to.equal(0);
-      expect(runner.errors.length).to.equal(1);
-      expect(runner.snapshot).to.be.undefined;
-      done();
-    });
+    expect(context.emit.lastCall.firstArg)
+      .to.equal('data'); // with data
   });
 
-  it('should parse simple string rows', (done) => {
-    const cfg = {
-      reader: {
-        columns: [
-          {
-            property: 'text',
-          },
-          {
-            property: 'text2',
-          },
-        ],
-      },
-      url: 'http://test.env.mock/simple.csv',
+  it('emitAll: true, header: true, dynamicTyping: true', async () => {
+    msg.body = {
+      url: 'http://test.env.mock/formats.csv',
+      header: true,
+      dynamicTyping: true,
     };
+    cfg = {
+      emitAll: true,
+    };
+    context.emit = sinon.spy();
+    await readCSV.process.call(context, msg, cfg);
 
-    runTest(csv.process, {}, cfg, (runner) => {
-      expect(runner.data.length).to.equal(2);
+    expect(context.emit.callCount)
+      .to.equal(1); // one emit call
 
-      expect(runner.data[0].body).to.deep.equal({
-        text: 'lorem',
-        text2: 'ipsum',
-      });
+    expect(context.emit.getCall(0).args[1].body.result.length)
+      .to.equal(2); // result is array with 2 records
 
-      expect(runner.data[1].body).to.deep.equal({
-        text: 'dolor',
-        text2: 'sit amet',
-      });
+    expect(context.emit.getCall(0).args[1].body.result[0].Text)
+      .to.equal('Lorem ipsum dolor sit amet'); // with text
 
-      expect(runner.errors.length).to.equal(0);
-      expect(runner.snapshot).to.be.undefined;
-      done();
-    });
+    expect(context.emit.getCall(0).args[1].body.result[0].Number)
+      .to.equal(2.71828); // Number
   });
 
-  it('should parse simple date rows', (done) => {
-    const msg = {};
-
-    const cfg = {
-      reader: {
-        columns: [
-          {
-            property: 'time',
-            type: 'date',
-            format: 'DD/MM/YYYY HH:mm:ss',
-          },
-          {
-            property: 'time2',
-            type: 'date',
-            format: 'YYYY-MM-DDTHH:mm:ss Z',
-          },
-          {
-            property: 'time3',
-            type: 'date',
-            format: 'YYYY-MM-DD HH:mm:ss Z',
-          },
-        ],
-      },
-      url: 'http://test.env.mock/dates.csv',
+  it('emitAll: false, header: false, dynamicTyping: false', async () => {
+    msg.body = {
+      url: 'http://test.env.mock/formats.csv',
+      header: false,
+      dynamicTyping: false,
     };
+    cfg = {
+      emitAll: false,
+    };
+    context.emit = sinon.spy();
+    await readCSV.process.call(context, msg, cfg);
 
-    runTest(csv.process, msg, cfg, (runner) => {
-      expect(runner.data.length).to.equal(1);
+    expect(context.emit.callCount)
+      .to.equal(3); // 3 emit calls
 
-      const { body } = runner.data[0];
-
-      expectDate(body.time, 2013, 7, 13, 25, 55);
-      expectDate(body.time2, 2013, 7, 14, 12, 5);
-      expectDate(body.time3, 2013, 7, 15, 45, 36);
-
-      expect(runner.errors.length).to.equal(0);
-      expect(runner.snapshot).to.be.undefined;
-
-      done();
-    });
+    expect(context.emit.getCall(1).args[1].body.column0)
+      .to.equal('2.71828'); // result is number as string
   });
 
-  it('should parse simple number rows', (done) => {
-    const msg = {};
-
-    const cfg = {
-      reader: {
-        columns: [
-          {
-            property: 'simpleInt',
-            type: 'number',
-          },
-          {
-            property: 'pi',
-            type: 'number',
-            format: 'dec_comma',
-          },
-          {
-            property: 'euler',
-            type: 'number',
-            format: 'dec_point',
-          },
-        ],
-      },
-      url: 'http://test.env.mock/numbers.csv',
+  it('Should fail - no File', async () => {
+    msg.body = {
     };
-
-    runTest(csv.process, msg, cfg, (runner) => {
-      expect(runner.data.length).to.equal(1);
-
-      const { body } = runner.data[0];
-
-      expect(body.simpleInt).to.equal(123);
-
-      expect(body.pi).to.equal(3.14159265359);
-
-      expect(body.euler).to.equal(2.71828);
-
-      expect(runner.errors.length).to.equal(0);
-      expect(runner.snapshot).to.be.undefined;
-
-      done();
-    });
+    cfg = {
+    };
+    context.emit = sinon.spy();
+    await readCSV.process.call(context, msg, cfg);
+    expect(context.emit.getCall(0).firstArg).to.equal('error');
+    expect(context.emit.getCall(0).lastArg).to.be.contains('URL of the CSV is missing');
   });
 
-  it('should parse US numbers', (done) => {
-    const msg = {};
-
-    const cfg = {
-      reader: {
-        columns: [
-          {
-            property: 'simpleInt',
-            type: 'number',
-            format: 'dec_point',
-          },
-          {
-            property: 'doubleValue',
-            type: 'number',
-            format: 'dec_point',
-          },
-        ],
-      },
-      url: 'http://test.env.mock/numbers_us.csv',
+  it('Should fail - 404', async () => {
+    msg.body = {
+      url: 'https://example.com/1.csv',
+      header: true,
     };
-
-    runTest(csv.process, msg, cfg, (runner) => {
-      expect(runner.data.length).to.equal(1);
-
-      const { body } = runner.data[0];
-
-      expect(body.simpleInt).to.equal(123456);
-
-      expect(body.doubleValue).to.equal(123456.789);
-
-      expect(runner.errors.length).to.equal(0);
-      expect(runner.snapshot).to.be.undefined;
-
-      done();
-    });
-  });
-
-  it('should parse DE numbers', (done) => {
-    const msg = {};
-
-    const cfg = {
-      reader: {
-        columns: [
-          {
-            property: 'simpleInt',
-            type: 'number',
-            format: 'dec_comma',
-          },
-          {
-            property: 'doubleValue',
-            type: 'number',
-            format: 'dec_comma',
-          },
-          {
-            property: 'doubleValue2',
-            type: 'number',
-            format: 'dec_comma',
-          },
-        ],
-      },
-      url: 'http://test.env.mock/numbers_de.csv',
+    cfg = {
+      emitAll: true,
     };
-
-    runTest(csv.process, msg, cfg, (runner) => {
-      expect(runner.data.length).to.equal(1);
-
-      const { body } = runner.data[0];
-
-      expect(body.simpleInt).to.equal(123456);
-
-      expect(body.doubleValue).to.equal(123456.789);
-
-      expect(body.doubleValue2).to.equal(111222333);
-
-      expect(runner.errors.length).to.equal(0);
-      expect(runner.snapshot).to.be.undefined;
-
-      done();
-    });
+    context.emit = sinon.spy();
+    await readCSV.process.call(context, msg, cfg);
+    expect(context.emit.getCall(0).firstArg).to.equal('error');
+    expect(context.emit.getCall(0).lastArg).to.be.contains('status code 404');
   });
 });

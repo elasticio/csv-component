@@ -3,7 +3,7 @@
   "description": "CSV Component for elastic.io platform",
   "main": "index.js",
   "scripts": {
-    "pretest": "eslint lib/ spec spec-integration --fix",
+    "pretest": "eslint lib/ spec --fix",
     "test": "mocha spec",
     "integration-test": "mocha spec-integration"
   },
