@@ -41,9 +41,9 @@ To configure this action the following fields can be used:
 #### Input Metadata
 
 *   `URL` - We will fetch this URL and parse it as CSV file
-*   `Contains headers` - if true, the first row of parsed data will be interpreted as field names.
+*   `Contains headers` - if true, the first row of parsed data will be interpreted as field names, false by default.
 *   `Delimiter` - The delimiting character. Leave blank to auto-detect from a list of most common delimiters.
-*   `Convert Data types` - numeric, date and boolean data will be converted to their type instead of remaining strings.
+*   `Convert Data types` - numeric, date and boolean data will be converted to their type instead of remaining strings, false by default.
 
 ### Write CSV attachment
 
