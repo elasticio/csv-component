@@ -8,6 +8,10 @@
     "read_action": {
       "main": "./lib/actions/read.js",
       "title": "Read CSV attachment",
+      "help": {
+        "description": "This action will read the CSV attachment of the incoming message or from the specified URL and output a JSON object.",
+        "link": "/components/csv/actions#read-csv-attachment"
+      },
       "fields": {
         "emitAll": {
           "label": "Emit Behavior",
