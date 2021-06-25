@@ -3,59 +3,29 @@
   "description": "A comma-separated values (CSV) file stores tabular data (numbers and text) in plain-text form",
   "docsUrl": "https://github.com/elasticio/csv-component",
   "buildType": "docker",
-  "version": "2.2.0",
-  "triggers": {
-    "read": {
-      "main": "./lib/triggers/read.js",
-      "title": "Read CSV file from URL",
-      "help": {
-        "description": "Fetch a CSV file from a given URL and store it in the attachment storage.",
-        "link": "/components/csv/triggers#read-csv-file-from-url"
-      },
-      "type": "polling",
-      "fields": {
-        "url": {
-          "label": "CSV URL",
-          "required": true,
-          "placeholder": "http://my-url.com/foo.csv",
-          "note": "We will fetch this URL and parse it as CSV file",
-          "viewClass": "TextFieldWithNoteView"
-        },
-        "reader": {
-          "viewClass": "CSVReadView"
-        }
-      },
-      "metadata": {
-        "out": {}
-      }
-    }
-  },
+  "version": "3.0.0",
   "actions": {
     "read_action": {
-      "main": "./lib/triggers/read.js",
+      "main": "./lib/actions/read.js",
       "title": "Read CSV attachment",
       "help": {
-        "description": "Read a CSV attachment of an incoming message.",
+        "description": "This action will read the CSV attachment of the incoming message or from the specified URL and output a JSON object.",
         "link": "/components/csv/actions#read-csv-attachment"
       },
       "fields": {
-        "url": {
-          "label": "CSV URL",
-          "required": false,
-          "placeholder": "http://my-url.com/foo.csv",
-          "note": "We will fetch this URL and parse it as CSV file, leave the field blank if you expect CSV attachment from previous step",
-          "viewClass": "TextFieldWithNoteView"
-        },
         "emitAll": {
-          "label": "Emit all messages",
-          "viewClass": "CheckBoxView"
-        },
-        "reader": {
-          "viewClass": "CSVReadView",
-          "required": true
+          "label": "Emit Behavior",
+          "required": true,
+          "viewClass": "SelectView",
+          "model": {
+            "true": "Fetch All",
+            "false": "Emit Individually"
+          },
+          "prompt": "Select Emit Behavior"
         }
       },
       "metadata": {
+        "in": "./lib/schemas/read.in.json",
         "out": {}
       }
     },

@@ -1,3 +1,13 @@
+## 3.0.0 (June 25, 2021)
+* Deleted old action: `Read CSV file from URL`
+* Deleted old trigger: `Read CSV attachment`
+* New action renamed: from `Read CSV file from URL v2` to `Read CSV attachment`
+* Fixed memory leak on big CSV files
+
+## 2.3.0-dev.1 (June 16, 2021)
+* Add action: `Read CSV file from URL v2`
+* Add trigger: `Read CSV attachment v2`
+
 ## 2.2.0 (April 23, 2021)
 * Add pipe to list of separators in `Write CSV attachment from JSON Array` and `Write CSV attachment from JSON Object` actions 
 * Bump dependencies

@@ -1,0 +1,25 @@
+{
+    "type": "object",
+    "properties": {
+        "url": {
+            "type": "string",
+            "required": true,
+            "title": "URL"
+        },
+        "header": {
+            "type": "boolean",
+            "required": false,
+            "title": "Contains headers"
+        },
+        "delimiter": {
+            "type": "string",
+            "required": false,
+            "title": "Delimiter"
+        },
+        "dynamicTyping": {
+            "type": "boolean",
+            "required": false,
+            "title": "Convert Data types"
+        }
+    }
+}

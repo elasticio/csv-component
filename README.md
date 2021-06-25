@@ -27,22 +27,6 @@ Name|Mandatory|Description|Values|
 
 The component does not require credentials to function.
 
-
-## Triggers
-
-### Read CSV file from URL
-
-This trigger will fetch the CSV file from a given URL. The address must be accessible
-to the component. The fetched CSV file will be placed in the attachment part of the
-outgoing message.
-
-*   `CSV URL` - the full URL to the file for retrieving data.
-*   `Emit all messages` - this checkbox configures output behavior of the component. If the option is checked - the component emits an array of messages, otherwise - the component emits a message per row.
-*   `CSV Header` - this is a required field. Input the names of headers separated with a comma.
-*   `Separators` - Specify the separator type. Usually it is a comma (`,`) but values like Semicolon (`;`), Space (` `), Tab (`\t`) and Hash (`#`) are also supported.
-*   `Skip rows` - if you know that the incoming CSV file has certain number of headers you can indicate to skip them. The supported values are `None`, `First row`, `First two`, `First three` and `First four`.
-*   `Data columns` - here the values will be added dynamically based on the values in the `CSV Header` field. Here each data column will be listed with the name, Data Type and the Format to enable further configuration.
-
 ## Actions
 
 ### Read CSV attachment
@@ -50,13 +34,16 @@ outgoing message.
 This action will read the CSV attachment of the incoming message or from the specified URL and output a JSON object.
 To configure this action the following fields can be used:
 
+#### Config Fields
 
-*   `CSV URL` - the full URL to the file for retrieving data. Leave the field blank and action will read CSV attachment of the incoming message (if any). Error will be thrown if URL of the CSV is missing and no CSV file in incoming message found
-*   `Emit all messages` - this checkbox configures output behavior of the component. If the option is checked - the component emits an array of messages, otherwise - the component emits a message per row.
-*   `CSV Header` - this is a required field. Input the names of headers separated with a comma.
-*   `Separators` - Specify the separator type. Usually it is a comma (`,`) but values like Semicolon (`;`), Space (` `), Tab (`\t`) and Hash (`#`) are also supported.
-*   `Skip rows` - if you know that the incoming CSV file has certain number of headers you can indicate to skip them. The supported values are `None`, `First row`, `First two`, `First three` and `First four`.
-*   `Data columns` - here the values will be added dynamically based on the values in the `CSV Header` field. Here each data column will be listed with the name, Data Type and the Format to enable further configuration.
+*   `Emit Behavior` - this selector configures output behavior of the component. If the option is `Fetch All` - the component emits an array of messages, otherwise (`Emit Individually`) - the component emits a message per row.
+
+#### Input Metadata
+
+*   `URL` - We will fetch this URL and parse it as CSV file
+*   `Contains headers` - if true, the first row of parsed data will be interpreted as field names, false by default.
+*   `Delimiter` - The delimiting character. Leave blank to auto-detect from a list of most common delimiters.
+*   `Convert Data types` - numeric, date and boolean data will be converted to their type instead of remaining strings, false by default.
 
 ### Write CSV attachment
 
