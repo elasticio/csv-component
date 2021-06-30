@@ -3,7 +3,7 @@
   "description": "A comma-separated values (CSV) file stores tabular data (numbers and text) in plain-text form",
   "docsUrl": "https://github.com/elasticio/csv-component",
   "buildType": "docker",
-  "version": "3.0.0",
+  "version": "4.0.0-dev.1",
   "actions": {
     "read_action": {
       "main": "./lib/actions/read.js",
@@ -29,127 +29,67 @@
         "out": {}
       }
     },
-    "write_attachment": {
+    "write_from_stream": {
       "main": "./lib/actions/write.js",
-      "title": "Write CSV attachment",
+      "title": "Create CSV From Message Stream",
       "help": {
         "description": "Multiple incoming events can be combined into one CSV file with the write CSV action.",
         "link": "/components/csv/actions#write-csv-attachment"
       },
       "fields": {
-        "includeHeaders": {
-          "label": "Include Headers",
-          "required": false,
-          "viewClass": "SelectView",
-          "description": "Default Yes",
-          "model": {
-            "Yes": "Yes",
-            "No": "No"
-          },
+        "uploadToAttachment": {
+          "label": "Upload CSV as file to attachments",
+          "viewClass": "CheckBoxView",
+          "description": "If checked store the generated CSV data as an attachment",
           "prompt": "Include headers? Default Yes."
         },
-        "writer": {
-          "viewClass": "CSVWriteView"
-        }
-      },
-      "metadata": {
-        "in": {
-          "type": "object",
-          "properties": {}
-        },
-        "out": {}
-      }
-    },
-    "write_attachment_from_json": {
-      "main": "./lib/actions/writeFromJson.js",
-      "title": "Write CSV attachment from JSON Object",
-      "help": {
-        "description": "Multiple incoming events can be combined into one CSV file with the write CSV action.",
-        "link": "/components/csv/actions#write-csv-attachment-from-json-object"
-      },
-      "fields": {
-        "includeHeaders": {
-          "label": "Include Headers",
-          "required": false,
-          "viewClass": "SelectView",
-          "description": "Default Yes",
-          "model": {
-            "Yes": "Yes",
-            "No": "No"
-          },
-          "prompt": "Include headers? Default Yes"
-        },
         "separator": {
-          "label": "Separators",
-          "required": true,
-          "viewClass": "SelectView",
-          "model": {
-            "comma": "Comma (,)",
-            "semicolon": "Semicolon (;)",
-            "space": "Space ( )",
-            "tab": "Tab (\\t)",
-            "pipe": "Pipe (\u00A6)"
-          },
-          "prompt": "Choose required CSV delimiter"
+          "viewClass": "TextFieldView",
+          "required": false,
+          "label": "Separator",
+          "note": "A single char used to delimit the CSV file. Default to ','"
+        },
+        "order": {
+          "viewClass": "TextFieldView",
+          "required": false,
+          "label": "Column Order",
+          "note": "A string delimited with the separator (use same as above) indicating which columns & in what order the columns should appear in the resulting file. If omitted, the column order in the resulting file will not be deterministic."
         }
       },
       "metadata": {
-        "in": {
-          "type": "object",
-          "properties": {
-            "inputObject": {
-              "type": "object",
-              "properties": {}
-            }
-          }
-        },
+        "in": "./lib/schemas/writeFromStream.in.json",
         "out": {}
       }
     },
     "write_attachment_from_array": {
-      "main": "./lib/actions/writeFromArray.js",
-      "title": "Write CSV attachment from JSON Array",
+      "main": "./lib/actions/write.js",
+      "title": "Create CSV From JSON Array",
       "help": {
-        "description": "Incoming array can be converted into one CSV file with the write CSV action.",
-        "link": "/components/csv/actions#write-csv-attachment-from-json-array"
+        "description": "Incoming array can be converted into one CSV file",
+        "link": "/components/csv/actions#write-csv-attachment"
       },
       "fields": {
-        "includeHeaders": {
-          "label": "Include Headers",
-          "required": false,
-          "viewClass": "SelectView",
-          "description": "Default Yes",
-          "model": {
-            "Yes": "Yes",
-            "No": "No"
-          },
-          "prompt": "Include headers? Default Yes"
+        "uploadToAttachment": {
+          "label": "Upload CSV as file to attachments",
+          "viewClass": "CheckBoxView",
+          "description": "If checked store the generated CSV data as an attachment",
+          "prompt": "Include headers? Default Yes."
         },
         "separator": {
-          "label": "Separators",
-          "required": true,
-          "viewClass": "SelectView",
-          "model": {
-            "comma": "Comma (,)",
-            "semicolon": "Semicolon (;)",
-            "space": "Space ( )",
-            "tab": "Tab (\\t)",
-            "pipe": "Pipe (\u00A6)"
-          },
-          "prompt": "Choose required CSV delimiter"
+          "viewClass": "TextFieldView",
+          "required": false,
+          "label": "Separator",
+          "note": "A single char used to delimit the CSV file. Default to ','"
+        },
+        "order": {
+          "viewClass": "TextFieldView",
+          "required": false,
+          "label": "Column Order",
+          "note": "A string delimited with the separator (use same as above) indicating which columns & in what order the columns should appear in the resulting file. If omitted, the column order in the resulting file will not be deterministic."
         }
       },
       "metadata": {
-        "in": {
-          "type": "object",
-          "properties": {
-            "inputArray": {
-              "type": "array",
-              "required": true,
-              "items": {}
-            }
-          }
-        },
+        "in": "./lib/schemas/writeFromArray.in.json",
         "out": {}
       }
     }

@@ -1,0 +1,21 @@
+{
+    "type": "object",
+    "properties": {
+        "header": {
+            "type": "boolean",
+            "required": true,
+            "title": "Include Headers"
+        },
+        "items": {
+            "type": "array",
+            "required": true,
+            "title": "Input Array",
+            "items": {
+                "type": "object",
+                "required": true,
+                "properties" : {
+                }
+            }
+        }
+    }
+}

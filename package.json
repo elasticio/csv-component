@@ -4,7 +4,7 @@
   "main": "index.js",
   "scripts": {
     "pretest": "eslint lib/ spec --fix",
-    "test": "mocha spec",
+    "test": "nyc mocha spec",
     "integration-test": "mocha spec-integration"
   },
   "engines": {
@@ -27,32 +27,19 @@
   "homepage": "https://github.com/elasticio/csv-component#readme",
   "dependencies": {
     "@elastic.io/component-commons-library": "1.1.5",
-    "@elastic.io/component-logger": "0.0.1",
-    "axios": "0.21.1",
-    "co": "4.6.0",
-    "csv": "5.3.2",
-    "csv-parser": "3.0.0",
     "elasticio-node": "0.0.9",
-    "elasticio-rest-node": "1.2.6",
-    "elasticio-sailor-nodejs": "2.6.24",
-    "lodash": "4.17.20",
-    "moment": "2.29.1",
-    "node-uuid": "1.4.8",
-    "papaparse": "5.3.1",
-    "q": "1.5.1",
-    "stream": "0.0.2",
-    "underscore": "1.12.0"
+    "elasticio-sailor-nodejs": "2.6.26",
+    "papaparse": "5.3.1"
   },
   "devDependencies": {
-    "chai": "4.2.0",
-    "chai-as-promised": "7.1.1",
-    "dotenv": "8.2.0",
-    "eslint": "7.16.0",
+    "chai": "4.3.4",
+    "eslint": "7.29.0",
     "eslint-config-airbnb-base": "14.2.1",
-    "eslint-plugin-import": "2.22.1",
-    "eslint-plugin-mocha": "8.0.0",
+    "eslint-plugin-import": "2.23.4",
+    "eslint-plugin-mocha": "9.0.0",
     "mocha": "8.2.1",
     "nock": "13.0.5",
+    "nyc": "15.1.0",
     "sinon": "9.2.2"
   }
 }
