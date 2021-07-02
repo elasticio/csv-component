@@ -3,7 +3,7 @@
   "description": "A comma-separated values (CSV) file stores tabular data (numbers and text) in plain-text form",
   "docsUrl": "https://github.com/elasticio/csv-component",
   "buildType": "docker",
-  "version": "3.0.0-dev.3",
+  "version": "3.0.0-dev.4",
   "actions": {
     "read_action": {
       "main": "./lib/actions/read.js",
@@ -56,10 +56,7 @@
           "note": "A string delimited with the separator (use same as above) indicating which columns & in what order the columns should appear in the resulting file. If omitted, the column order in the resulting file will not be deterministic."
         }
       },
-      "metadata": {
-        "in": "./lib/schemas/writeFromStream.in.json",
-        "out": {}
-      }
+      "dynamicMetadata": true
     },
     "write_attachment_from_array": {
       "main": "./lib/actions/writeArray.js",
@@ -88,10 +85,7 @@
           "note": "A string delimited with the separator (use same as above) indicating which columns & in what order the columns should appear in the resulting file. If omitted, the column order in the resulting file will not be deterministic."
         }
       },
-      "metadata": {
-        "in": "./lib/schemas/writeFromArray.in.json",
-        "out": {}
-      }
+      "dynamicMetadata": true
     }
   }
 }

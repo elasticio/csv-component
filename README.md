@@ -55,12 +55,12 @@ and attached to the outgoing message.
 
 * `Upload CSV as file to attachments` -  If checked store the generated CSV data as an attachment. If unchecked, place the CSV as a string in the outbound message.
 * `Separator` - A single char used to delimit the CSV file. Default to `,`
-* `Column Order` - A string delimited with the separator indicating which columns & in what order the columns should appear in the resulting file. If omitted, the column order in the resulting file will not be deterministic.
+* `Column Order` - A string delimited with the separator indicating which columns & in what order the columns should appear in the resulting file. If omitted, the column order in the resulting file will not be deterministic. Columns names will be trimmed (removed spaces in beginning and end of column name, for example: 'col 1,col 2 ,col 3, col 4' => ['col 1', 'col 2', 'col 3', 'col 4'])
 
 #### Input Metadata
 
 * `Include Headers` - Indicates if a header row should be included in the generated file.
-* `Input Object` - Object to be written as a row in the CSV file. If the Column Order is specified, then individual properties can be specified.
+* `Input Object` - Object to be written as a row in the CSV file. If the Column Order is specified, then individual properties can be specified. Component throw error on empty object.
 
 #### Output Metadata
 
@@ -88,7 +88,7 @@ This action will convert an incoming array into a CSV file
 #### Input Metadata
 
 * `Include Headers` - Indicates if a header row should be included in the generated file.
-* `Input Array` - Array of objects to be written as rows in the CSV file. (One row per object + headers) If the Column Order is specified, then individual properties can be specified.
+* `Input Array` - Array of objects to be written as rows in the CSV file. (One row per object + headers) If the Column Order is specified, then individual properties can be specified. Component throw error on empty array.
 
 #### Output Metadata
 
