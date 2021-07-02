@@ -1,15 +1,13 @@
-## 4.0.0 (June 29, 2021)
-* Deleted old action: `Write CSV attachment`
-* Deleted old action: `Write CSV attachment from JSON Array`
-* Deleted old action: `Write CSV attachment from JSON Object`
-* Add New action: `Create CSV From Message Stream`
-* Add New action: `Create CSV From JSON Array`
-* Removed old dependencies
-
 ## 3.0.0 (June 25, 2021)
 * Deleted old action: `Read CSV file from URL`
 * Deleted old trigger: `Read CSV attachment`
+* Deleted old action: `Write CSV attachment`
+* Deleted old action: `Write CSV attachment from JSON Array`
+* Deleted old action: `Write CSV attachment from JSON Object`
 * Add New action: `Read CSV attachment`
+* Add New action: `Create CSV From Message Stream`
+* Add New action: `Create CSV From JSON Array`
+* Removed old dependencies
 
 ## 2.2.0 (April 23, 2021)
 * Add pipe to list of separators in `Write CSV attachment from JSON Array` and `Write CSV attachment from JSON Object` actions 

@@ -3,7 +3,7 @@
   "description": "A comma-separated values (CSV) file stores tabular data (numbers and text) in plain-text form",
   "docsUrl": "https://github.com/elasticio/csv-component",
   "buildType": "docker",
-  "version": "4.0.0-dev.1",
+  "version": "3.0.0-dev.3",
   "actions": {
     "read_action": {
       "main": "./lib/actions/read.js",
@@ -30,7 +30,7 @@
       }
     },
     "write_from_stream": {
-      "main": "./lib/actions/write.js",
+      "main": "./lib/actions/writeStream.js",
       "title": "Create CSV From Message Stream",
       "help": {
         "description": "Multiple incoming events can be combined into one CSV file with the write CSV action.",
@@ -62,7 +62,7 @@
       }
     },
     "write_attachment_from_array": {
-      "main": "./lib/actions/write.js",
+      "main": "./lib/actions/writeArray.js",
       "title": "Create CSV From JSON Array",
       "help": {
         "description": "Incoming array can be converted into one CSV file",
