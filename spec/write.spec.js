@@ -253,4 +253,32 @@ describe('CSV Write component', async () => {
     expect(context.emit.args[0][1].body.csvString)
       .to.equal('d;a\r\n😂;🙈\r\n😂;🙈'); // with text
   });
+
+  it('Metadata test - in', async () => {
+    cfg = {
+      separator: ';',
+      order: 'd;a',
+    };
+
+    const metadataStream = writeStream.getMetaModel(cfg);
+    const metadataArray = writeArray.getMetaModel(cfg);
+
+    expect(metadataStream.in.properties.items.properties.a.title)
+      .to.equal('a');
+
+    expect(metadataArray.in.properties.items.items.properties.a.title)
+      .to.equal('a');
+  });
+
+  it('Metadata test - out', async () => {
+    const metadataStream = writeStream.getMetaModel({ uploadToAttachment: false });
+    const metadataStreamUpload = writeStream.getMetaModel({ uploadToAttachment: true });
+    const metadataArray = writeStream.getMetaModel({ uploadToAttachment: false });
+    const metadataArrayUpload = writeArray.getMetaModel({ uploadToAttachment: true });
+
+    expect(metadataStream.out.properties.csvString.required).to.equal(true);
+    expect(metadataStreamUpload.out.properties.attachmentUrl.required).to.equal(true);
+    expect(metadataArray.out.properties.csvString.required).to.equal(true);
+    expect(metadataArrayUpload.out.properties.attachmentUrl.required).to.equal(true);
+  });
 });
