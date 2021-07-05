@@ -88,7 +88,7 @@ This action will convert an incoming array into a CSV file
 #### Input Metadata
 
 * `Include Headers` - Indicates if a header row should be included in the generated file.
-* `Input Array` - Array of objects to be written as rows in the CSV file. (One row per object + headers) If the Column Order is specified, then individual properties can be specified. Component throw error on empty array.
+* `Input Array` - Array of objects to be written as rows in the CSV file. (One row per object + headers) If the Column Order is specified, then individual properties can be specified. The component will throw an error when the array is empty.
 
 #### Output Metadata
 
