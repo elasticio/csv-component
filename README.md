@@ -60,7 +60,7 @@ and attached to the outgoing message.
 #### Input Metadata
 
 * `Include Headers` - Indicates if a header row should be included in the generated file.
-* `Input Object` - Object to be written as a row in the CSV file. If the Column Order is specified, then individual properties can be specified. Component throw error on empty object.
+* `Input Object` - Object to be written as a row in the CSV file. If the Column Order is specified, then individual properties can be specified.
 
 #### Output Metadata
 
