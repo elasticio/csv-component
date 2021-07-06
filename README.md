@@ -1,6 +1,18 @@
 [![CircleCI](https://circleci.com/gh/elasticio/csv-component.svg?style=svg)](https://circleci.com/gh/elasticio/csv-component)
 # CSV Component
 
+## Table of Contents
+* [Description](#description)
+* [How works](#how-works)
+* [Requirements](#requirements)
+* [Environment variables](#environment-variables)
+* [Credentials](#credentials)
+* [Actions](#actions)
+  * [Read CSV attachment](#read-CSV-attachment)
+  * [Create CSV From Message Stream](#create-CSV-from-message-stream)
+  * [Create CSV From JSON Array](#create-CSV-from-JSON-array)
+* [Limitations](#limitations)
+
 ## Description
 
 A component to read and write Comma Separated Values (CSV) files.
@@ -75,7 +87,7 @@ and attached to the outgoing message.
   * `attachmentExpiryTime` - When the attachment is set to expire
   * `contentType` - Always set to `text/csv`
 
-### Create CSV From Message Stream
+### Create CSV From JSON Array
 
 This action will convert an incoming array into a CSV file
 
@@ -103,9 +115,9 @@ This action will convert an incoming array into a CSV file
   * `attachmentExpiryTime` - When the attachment is set to expire
   * `contentType` - Always set to `text/csv`
 
-### Limitations
+## Limitations
 
-#### General
+### General
 
 * You may get `Component run out of memory and terminated.` error during run-time, that means that component needs more memory, please add
  `EIO_REQUIRED_RAM_MB` environment variable with an appropriate value (e.g. value `1024` means that 1024 MB will be allocated) for the component in this case.
