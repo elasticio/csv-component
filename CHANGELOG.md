@@ -1,12 +1,17 @@
-## 3.0.0 (June 25, 2021)
-* Deleted old action: `Read CSV file from URL`
-* Deleted old trigger: `Read CSV attachment`
-* Deleted old action: `Write CSV attachment`
-* Deleted old action: `Write CSV attachment from JSON Array`
-* Deleted old action: `Write CSV attachment from JSON Object`
-* Add New action: `Read CSV attachment`
-* Add New action: `Create CSV From Message Stream`
-* Add New action: `Create CSV From JSON Array`
+## 3.0.0 (July 9, 2021)
+* Deleted trigger:  
+  - `Read CSV attachment`
+* Deleted actions:
+  - `Write CSV attachment`
+  - `Write CSV attachment from JSON Array`
+  - `Write CSV attachment from JSON Object`
+  - `Read CSV file from URL`
+
+* Add New actions:
+  - `Read CSV attachment`
+  - `Create CSV From Message Stream`
+  - `Create CSV From JSON Array`
+
 * Removed old dependencies
 
 ## 2.2.0 (April 23, 2021)
