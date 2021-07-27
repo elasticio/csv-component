@@ -1,4 +1,4 @@
-## 2.2.1 (July 27, 2021)
+## 3.0.1 (July 27, 2021)
 * Version to replace 3.0.0 on production 
 
 ## 2.2.0 (April 23, 2021)
