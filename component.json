@@ -3,7 +3,7 @@
   "description": "A comma-separated values (CSV) file stores tabular data (numbers and text) in plain-text form",
   "docsUrl": "https://github.com/elasticio/csv-component",
   "buildType": "docker",
-  "version": "2.2.1",
+  "version": "3.0.1",
   "triggers": {
     "read": {
       "main": "./lib/triggers/read.js",
