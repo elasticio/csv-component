@@ -1,4 +1,7 @@
 [![CircleCI](https://circleci.com/gh/elasticio/csv-component.svg?style=svg)](https://circleci.com/gh/elasticio/csv-component)
+
+# DEPRECATED COMPONENT. USE https://github.com/elasticio/csv-component-v3 instead
+
 # CSV Component
 
 ## Description
