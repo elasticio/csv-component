@@ -28,7 +28,7 @@
   "homepage": "https://github.com/elasticio/csv-component#readme",
   "dependencies": {
     "@elastic.io/component-logger": "0.0.1",
-    "axios": "0.21.1",
+    "axios": "0.21.2",
     "co": "4.6.0",
     "csv": "5.3.2",
     "csv-parser": "3.0.0",
