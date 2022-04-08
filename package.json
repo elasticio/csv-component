@@ -1,6 +1,5 @@
 {
   "name": "csv-component",
-  "version": "2.2.0",
   "description": "CSV Component for elastic.io platform",
   "main": "index.js",
   "scripts": {
