@@ -10,7 +10,7 @@
       "title": "Read CSV file from URL",
       "help": {
         "description": "Fetch a CSV file from a given URL and store it in the attachment storage.",
-        "link": "/components/csv/triggers#read-csv-file-from-url"
+        "link": "/components/csv/deprecated-functions.html#read-csv-file-from-url"
       },
       "type": "polling",
       "fields": {
@@ -36,7 +36,7 @@
       "title": "Read CSV attachment",
       "help": {
         "description": "Read a CSV attachment of an incoming message.",
-        "link": "/components/csv/actions#read-csv-attachment"
+        "link": "/components/csv/actions.html#read-csv-attachment"
       },
       "fields": {
         "url": {
@@ -64,7 +64,7 @@
       "title": "Write CSV attachment",
       "help": {
         "description": "Multiple incoming events can be combined into one CSV file with the write CSV action.",
-        "link": "/components/csv/actions#write-csv-attachment"
+        "link": "/components/csv/actions#create-csv-from-message-stream"
       },
       "fields": {
         "includeHeaders": {
@@ -95,7 +95,7 @@
       "title": "Write CSV attachment from JSON Object",
       "help": {
         "description": "Multiple incoming events can be combined into one CSV file with the write CSV action.",
-        "link": "/components/csv/actions#write-csv-attachment-from-json-object"
+        "link": "/components/csv/deprecated-functions.html#write-csv-attachment-from-json-object"
       },
       "fields": {
         "includeHeaders": {
@@ -141,7 +141,7 @@
       "title": "Write CSV attachment from JSON Array",
       "help": {
         "description": "Incoming array can be converted into one CSV file with the write CSV action.",
-        "link": "/components/csv/actions#write-csv-attachment-from-json-array"
+        "link": "/components/csv/actions#create-csv-from-json-array"
       },
       "fields": {
         "includeHeaders": {
